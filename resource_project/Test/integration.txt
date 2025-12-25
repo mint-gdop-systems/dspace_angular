@@ -1,0 +1,1373 @@
+Step 1: Configure DSpace REST API
+First, let's enable and configure DSpace REST API:
+
+Enable DSpace REST API
+bash
+# Navigate to your DSpace installation
+cd /path/to/dspace
+
+# Check if REST API is already deployed
+# The REST API should be at: http://localhost:8080/server
+If REST API is not working, you may need to deploy it in Tomcat. Based on your setup, it seems to be running at http://localhost:8080/server
+
+Test DSpace REST API
+bash
+# Test if REST API is running
+curl http://localhost:8080/server/test
+
+# Expected response: "REST api is running."
+Step 2: Essential DSpace APIs You'll Need
+Here are the crucial DSpace APIs for your integration:
+
+Authentication
+POST /server/login - Get authentication token
+
+POST /server/logout - Logout
+
+GET /server/status - Check token status
+
+File Management
+POST /server/collections/{collectionId}/items - Create new item
+
+POST /server/items/{itemId}/bitstreams - Upload file to item
+
+GET /server/bitstreams/{bitstreamId}/retrieve - Download file
+
+GET /server/items/{itemId}/bitstreams - Get item's files
+
+Search & Browse
+GET /server/items - List/search items
+
+GET /server/collections - List collections
+
+GET /server/communities - List communities
+
+Step 3: Essential Koha APIs You'll Need
+Based on the Koha API documentation, here are the key endpoints:
+
+Bibliographic Records
+GET /api/v1/biblios - Search bibliographic records
+
+POST /api/v1/biblios - Create new bibliographic record
+
+GET /api/v1/biblios/{biblio_id} - Get specific record
+
+PUT /api/v1/biblios/{biblio_id} - Update record
+
+Items
+GET /api/v1/items - Search items
+
+POST /api/v1/items - Create new item
+
+GET /api/v1/items/{item_id} - Get specific item
+
+Step 4: Django Backend Integration
+Install required packages
+bash
+pip install requests python-dotenv
+Create environment configuration
+python
+# settings.py - Add these to your Django settings
+DSPACE_CONFIG = {
+    'REST_URL': 'http://localhost:8080/server',
+    'USERNAME': 'admin@dspace.org',  # Your DSpace admin email
+    'PASSWORD': 'admin',  # Your DSpace admin password
+}
+
+KOHA_CONFIG = {
+    'API_URL': 'http://127.0.0.1:8085/api/v1',
+    'API_KEY': 'your-koha-api-key',  # You need to generate this in Koha
+}
+Create DSpace API Client
+python
+# api_clients/dspace_client.py
+import requests
+from django.conf import settings
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+class DSpaceClient:
+    def __init__(self):
+        self.base_url = settings.DSPACE_CONFIG['REST_URL']
+        self.username = settings.DSPACE_CONFIG['USERNAME']
+        self.password = settings.DSPACE_CONFIG['PASSWORD']
+        self.token = None
+        self.session = self._create_session()
+        
+    def _create_session(self):
+        session = requests.Session()
+        retry_strategy = Retry(
+            total=3,
+            status_forcelist=[429, 500, 502, 503, 504],
+            method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE", "POST"]
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        session.mount("http://", adapter)
+        session.mount("https://", adapter)
+        return session
+    
+    def authenticate(self):
+        """Authenticate with DSpace and get token"""
+        try:
+            auth_url = f"{self.base_url}/login"
+            auth_data = {
+                "email": self.username,
+                "password": self.password
+            }
+            response = self.session.post(
+                auth_url, 
+                json=auth_data,
+                headers={'Accept': 'application/json'}
+            )
+            
+            if response.status_code == 200:
+                self.token = response.text.strip('"')
+                return True
+            else:
+                print(f"Authentication failed: {response.status_code} - {response.text}")
+                return False
+                
+        except Exception as e:
+            print(f"Authentication error: {str(e)}")
+            return False
+    
+    def get_headers(self):
+        """Get headers with authentication token"""
+        headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        if self.token:
+            headers['rest-dspace-token'] = self.token
+        return headers
+    
+    def test_connection(self):
+        """Test if DSpace API is accessible"""
+        try:
+            response = self.session.get(f"{self.base_url}/test")
+            return response.status_code == 200
+        except:
+            return False
+Test the DSpace Connection
+python
+# Create a management command to test connection
+# management/commands/test_dspace.py
+from django.core.management.base import BaseCommand
+from api_clients.dspace_client import DSpaceClient
+
+class Command(BaseCommand):
+    help = 'Test DSpace API connection'
+
+    def handle(self, *args, **options):
+        client = DSpaceClient()
+        
+        # Test basic connection
+        if client.test_connection():
+            self.stdout.write(
+                self.style.SUCCESS('✓ DSpace API is accessible')
+            )
+        else:
+            self.stdout.write(
+                self.style.ERROR('✗ DSpace API is not accessible')
+            )
+        
+        # Test authentication
+        if client.authenticate():
+            self.stdout.write(
+                self.style.SUCCESS('✓ DSpace authentication successful')
+            )
+            self.stdout.write(f'Token: {client.token}')
+        else:
+            self.stdout.write(
+                self.style.ERROR('✗ DSpace authentication failed')
+            )
+Run the test:
+
+bash
+python manage.py test_dspace
+Step 5: Create Koha API Client
+python
+# api_clients/koha_client.py
+import requests
+from django.conf import settings
+
+class KohaClient:
+    def __init__(self):
+        self.base_url = settings.KOHA_CONFIG['API_URL']
+        self.api_key = settings.KOHA_CONFIG['API_KEY']
+        self.session = requests.Session()
+        self.session.headers.update({
+            'Authorization': f'Bearer {self.api_key}',
+            'Accept': 'application/json'
+        })
+    
+    def search_biblios(self, query=None, limit=10, offset=0):
+        """Search bibliographic records"""
+        params = {}
+        if query:
+            params['q'] = query
+        params['limit'] = limit
+        params['offset'] = offset
+        
+        try:
+            response = self.session.get(
+                f"{self.base_url}/biblios",
+                params=params
+            )
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Koha search failed: {response.status_code}")
+                return None
+        except Exception as e:
+            print(f"Koha search error: {str(e)}")
+            return None
+    
+    def create_biblio(self, biblio_data):
+        """Create a new bibliographic record"""
+        try:
+            response = self.session.post(
+                f"{self.base_url}/biblios",
+                json=biblio_data
+            )
+            if response.status_code == 201:
+                return response.json()
+            else:
+                print(f"Koha create biblio failed: {response.status_code}")
+                return None
+        except Exception as e:
+            print(f"Koha create biblio error: {str(e)}")
+            return None
+Step 6: Create Django API Views
+python
+# views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+import json
+
+from .api_clients.dspace_client import DSpaceClient
+from .api_clients.koha_client import KohaClient
+
+@require_http_methods(["GET"])
+def api_status(request):
+    """Check status of all integrated services"""
+    dspace_client = DSpaceClient()
+    koha_client = KohaClient()
+    
+    status = {
+        'dspace': dspace_client.test_connection(),
+        'dspace_authenticated': dspace_client.authenticate(),
+        'koha': True  # We'll add proper check later
+    }
+    
+    return JsonResponse(status)
+
+@require_http_methods(["GET"])
+def list_collections(request):
+    """List DSpace collections"""
+    client = DSpaceClient()
+    if client.authenticate():
+        try:
+            response = client.session.get(
+                f"{client.base_url}/collections",
+                headers=client.get_headers()
+            )
+            if response.status_code == 200:
+                return JsonResponse(response.json(), safe=False)
+            else:
+                return JsonResponse(
+                    {'error': f'DSpace API returned {response.status_code}'},
+                    status=response.status_code
+                )
+        except Exception as e:
+            return JsonResponse(
+                {'error': str(e)},
+                status=500
+            )
+    else:
+        return JsonResponse(
+            {'error': 'DSpace authentication failed'},
+            status=401
+        )
+
+@require_http_methods(["GET"])
+def search_catalog(request):
+    """Search both DSpace and Koha"""
+    query = request.GET.get('q', '')
+    koha_client = KohaClient()
+    
+    results = {
+        'koha': koha_client.search_biblios(query),
+        'dspace': []  # We'll implement DSpace search in next step
+    }
+    
+    return JsonResponse(results)
+Step 7: URL Configuration
+python
+# urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('api/status/', views.api_status, name='api_status'),
+    path('api/collections/', views.list_collections, name='list_collections'),
+    path('api/search/', views.search_catalog, name='search_catalog'),
+]
+Step 8: Test Your Integration
+Start your Django development server:
+
+bash
+python manage.py runserver
+Test the endpoints:
+
+bash
+# Check API status
+curl http://localhost:8000/api/status/
+
+# List DSpace collections
+curl http://localhost:8000/api/collections/
+
+# Search catalog
+curl "http://localhost:8000/api/search/?q=test"
+Next Steps:
+In the next part, we'll implement:
+
+File upload to DSpace
+
+Creating catalog records in Koha
+
+Linking DSpace files with Koha records
+
+React components for the UI
+
+Would you like me to continue with the file upload implementation and React integration?
+
+so do all the rest step
+I'll continue with the complete implementation. Let's build the file upload, catalog integration, and React components.
+
+Step 9: Complete DSpace File Upload Implementation
+Enhanced DSpace Client with File Operations
+python
+# api_clients/dspace_client.py
+import os
+import json
+from django.core.files.uploadedfile import UploadedFile
+
+class DSpaceClient:
+    # ... (previous methods)
+    
+    def create_item(self, collection_id, metadata):
+        """Create a new item in DSpace"""
+        if not self.token and not self.authenticate():
+            return None
+            
+        item_url = f"{self.base_url}/collections/{collection_id}/items"
+        item_data = {
+            "metadata": self._format_metadata(metadata)
+        }
+        
+        response = self.session.post(
+            item_url,
+            json=item_data,
+            headers=self.get_headers()
+        )
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Create item failed: {response.status_code} - {response.text}")
+            return None
+    
+    def upload_bitstream(self, item_id, file_obj, filename=None):
+        """Upload file to DSpace item"""
+        if not self.token and not self.authenticate():
+            return None
+            
+        if filename is None:
+            filename = getattr(file_obj, 'name', 'file')
+        
+        bitstream_url = f"{self.base_url}/items/{item_id}/bitstreams"
+        
+        files = {
+            'file': (filename, file_obj, 'application/octet-stream')
+        }
+        
+        headers = self.get_headers()
+        # Remove Content-Type for file upload
+        if 'Content-Type' in headers:
+            del headers['Content-Type']
+        
+        response = self.session.post(
+            bitstream_url,
+            files=files,
+            headers=headers
+        )
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Upload failed: {response.status_code} - {response.text}")
+            return None
+    
+    def search_items(self, query=None, collection_id=None, limit=10, offset=0):
+        """Search items in DSpace"""
+        if not self.token and not self.authenticate():
+            return None
+            
+        params = {
+            'limit': limit,
+            'offset': offset
+        }
+        
+        if query:
+            params['query'] = query
+        
+        if collection_id:
+            params['collection'] = collection_id
+        
+        response = self.session.get(
+            f"{self.base_url}/items",
+            params=params,
+            headers=self.get_headers()
+        )
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Search failed: {response.status_code}")
+            return None
+    
+    def get_item_bitstreams(self, item_id):
+        """Get all bitstreams (files) for an item"""
+        if not self.token and not self.authenticate():
+            return None
+            
+        response = self.session.get(
+            f"{self.base_url}/items/{item_id}/bitstreams",
+            headers=self.get_headers()
+        )
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return None
+    
+    def download_bitstream(self, bitstream_id):
+        """Download a bitstream file"""
+        if not self.token and not self.authenticate():
+            return None
+            
+        response = self.session.get(
+            f"{self.base_url}/bitstreams/{bitstream_id}/retrieve",
+            headers=self.get_headers(),
+            stream=True
+        )
+        
+        if response.status_code == 200:
+            return response
+        else:
+            return None
+    
+    def _format_metadata(self, metadata_dict):
+        """Format metadata for DSpace API"""
+        formatted = []
+        for key, value in metadata_dict.items():
+            if isinstance(value, list):
+                for val in value:
+                    formatted.append({
+                        "key": key,
+                        "value": str(val),
+                        "language": None
+                    })
+            else:
+                formatted.append({
+                    "key": key,
+                    "value": str(value),
+                    "language": None
+                })
+        return formatted
+Step 10: Enhanced Koha Client
+python
+# api_clients/koha_client.py
+class KohaClient:
+    # ... (previous methods)
+    
+    def test_connection(self):
+        """Test Koha API connection"""
+        try:
+            response = self.session.get(f"{self.base_url}/biblios", params={'limit': 1})
+            return response.status_code in [200, 404]  # 404 might mean no records but API works
+        except:
+            return False
+    
+    def get_biblio(self, biblio_id):
+        """Get specific bibliographic record"""
+        try:
+            response = self.session.get(f"{self.base_url}/biblios/{biblio_id}")
+            if response.status_code == 200:
+                return response.json()
+            return None
+        except Exception as e:
+            print(f"Koha get biblio error: {str(e)}")
+            return None
+    
+    def create_item(self, biblio_id, item_data):
+        """Create an item for a bibliographic record"""
+        try:
+            response = self.session.post(
+                f"{self.base_url}/biblios/{biblio_id}/items",
+                json=item_data
+            )
+            if response.status_code == 201:
+                return response.json()
+            return None
+        except Exception as e:
+            print(f"Koha create item error: {str(e)}")
+            return None
+    
+    def update_biblio(self, biblio_id, biblio_data):
+        """Update a bibliographic record"""
+        try:
+            response = self.session.put(
+                f"{self.base_url}/biblios/{biblio_id}",
+                json=biblio_data
+            )
+            if response.status_code == 200:
+                return response.json()
+            return None
+        except Exception as e:
+            print(f"Koha update biblio error: {str(e)}")
+            return None
+Step 11: Django Views for File Management
+python
+# views.py
+import uuid
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def upload_document(request):
+    """Upload document to DSpace and create catalog record in Koha"""
+    try:
+        # Get form data
+        title = request.POST.get('title', '')
+        author = request.POST.get('author', '')
+        description = request.POST.get('description', '')
+        collection_id = request.POST.get('collection_id')
+        file_obj = request.FILES.get('file')
+        
+        if not file_obj or not collection_id:
+            return JsonResponse(
+                {'error': 'File and collection ID are required'},
+                status=400
+            )
+        
+        # Initialize clients
+        dspace_client = DSpaceClient()
+        koha_client = KohaClient()
+        
+        if not dspace_client.authenticate():
+            return JsonResponse(
+                {'error': 'DSpace authentication failed'},
+                status=500
+            )
+        
+        # Step 1: Create DSpace item
+        dspace_metadata = {
+            "dc.title": title,
+            "dc.contributor.author": author,
+            "dc.description.abstract": description,
+            "dc.type": "Text",
+        }
+        
+        dspace_item = dspace_client.create_item(collection_id, dspace_metadata)
+        if not dspace_item:
+            return JsonResponse(
+                {'error': 'Failed to create DSpace item'},
+                status=500
+            )
+        
+        # Step 2: Upload file to DSpace
+        bitstream = dspace_client.upload_bitstream(dspace_item['id'], file_obj)
+        if not bitstream:
+            return JsonResponse(
+                {'error': 'Failed to upload file to DSpace'},
+                status=500
+            )
+        
+        # Step 3: Create Koha catalog record
+        koha_record = {
+            "title": title,
+            "author": author,
+            "notes": description,
+            "metadata": {
+                "dspace_item_id": dspace_item['id'],
+                "dspace_handle": dspace_item.get('handle', ''),
+                "file_name": file_obj.name
+            }
+        }
+        
+        koha_biblio = koha_client.create_biblio(koha_record)
+        
+        response_data = {
+            'success': True,
+            'dspace': {
+                'item_id': dspace_item['id'],
+                'handle': dspace_item.get('handle'),
+                'bitstream_id': bitstream['id']
+            },
+            'koha': {
+                'biblio_id': koha_biblio.get('biblio_id') if koha_biblio else None
+            }
+        }
+        
+        return JsonResponse(response_data)
+        
+    except Exception as e:
+        return JsonResponse(
+            {'error': f'Upload failed: {str(e)}'},
+            status=500
+        )
+
+@require_http_methods(["GET"])
+def search_documents(request):
+    """Search across DSpace and Koha"""
+    query = request.GET.get('q', '')
+    collection_id = request.GET.get('collection_id')
+    limit = int(request.GET.get('limit', 10))
+    offset = int(request.GET.get('offset', 0))
+    
+    dspace_client = DSpaceClient()
+    koha_client = KohaClient()
+    
+    # Search DSpace
+    dspace_results = []
+    if dspace_client.authenticate():
+        dspace_results = dspace_client.search_items(
+            query=query,
+            collection_id=collection_id,
+            limit=limit,
+            offset=offset
+        ) or []
+    
+    # Search Koha
+    koha_results = koha_client.search_biblios(query=query, limit=limit, offset=offset) or {}
+    
+    # Combine results
+    combined_results = {
+        'dspace': dspace_results,
+        'koha': koha_results.get('records', []),
+        'query': query,
+        'total_dspace': len(dspace_results),
+        'total_koha': koha_results.get('total', 0)
+    }
+    
+    return JsonResponse(combined_results)
+
+@require_http_methods(["GET"])
+def download_document(request, bitstream_id):
+    """Download file from DSpace"""
+    dspace_client = DSpaceClient()
+    
+    if not dspace_client.authenticate():
+        return JsonResponse(
+            {'error': 'Authentication failed'},
+            status=401
+        )
+    
+    response = dspace_client.download_bitstream(bitstream_id)
+    if response:
+        # Get filename from response headers or use default
+        filename = 'document'
+        if 'Content-Disposition' in response.headers:
+            content_disposition = response.headers['Content-Disposition']
+            if 'filename=' in content_disposition:
+                filename = content_disposition.split('filename=')[1].strip('"')
+        
+        django_response = HttpResponse(
+            response.content,
+            content_type=response.headers.get('Content-Type', 'application/octet-stream')
+        )
+        django_response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return django_response
+    else:
+        return JsonResponse(
+            {'error': 'File not found'},
+            status=404
+        )
+
+@require_http_methods(["GET"])
+def get_collections(request):
+    """Get all DSpace collections"""
+    dspace_client = DSpaceClient()
+    
+    if not dspace_client.authenticate():
+        return JsonResponse(
+            {'error': 'Authentication failed'},
+            status=401
+        )
+    
+    response = dspace_client.session.get(
+        f"{dspace_client.base_url}/collections",
+        headers=dspace_client.get_headers()
+    )
+    
+    if response.status_code == 200:
+        return JsonResponse(response.json(), safe=False)
+    else:
+        return JsonResponse(
+            {'error': f'Failed to fetch collections: {response.status_code}'},
+            status=response.status_code
+        )
+Step 12: Update URL Configuration
+python
+# urls.py
+urlpatterns = [
+    path('api/status/', views.api_status, name='api_status'),
+    path('api/collections/', views.get_collections, name='get_collections'),
+    path('api/search/', views.search_documents, name='search_documents'),
+    path('api/upload/', views.upload_document, name='upload_document'),
+    path('api/download/<int:bitstream_id>/', views.download_document, name='download_document'),
+]
+Step 13: React Components
+API Service for React
+javascript
+// src/services/api.js
+const API_BASE = 'http://localhost:8000/api';
+
+export const libraryAPI = {
+  // Status check
+  getStatus: () => {
+    return fetch(`${API_BASE}/status/`).then(response => response.json());
+  },
+
+  // Collections
+  getCollections: () => {
+    return fetch(`${API_BASE}/collections/`).then(response => response.json());
+  },
+
+  // Search
+  search: (query, collectionId = null) => {
+    let url = `${API_BASE}/search/?q=${encodeURIComponent(query)}`;
+    if (collectionId) {
+      url += `&collection_id=${collectionId}`;
+    }
+    return fetch(url).then(response => response.json());
+  },
+
+  // Upload
+  uploadDocument: (formData) => {
+    return fetch(`${API_BASE}/upload/`, {
+      method: 'POST',
+      body: formData,
+    }).then(response => response.json());
+  },
+
+  // Download
+  downloadDocument: (bitstreamId) => {
+    return `${API_BASE}/download/${bitstreamId}/`;
+  }
+};
+Document Upload Component
+jsx
+// src/components/DocumentUpload.js
+import React, { useState, useEffect } from 'react';
+import { libraryAPI } from '../services/api';
+
+const DocumentUpload = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    author: '',
+    description: '',
+    collection_id: '',
+    file: null
+  });
+  const [collections, setCollections] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    loadCollections();
+  }, []);
+
+  const loadCollections = async () => {
+    try {
+      const data = await libraryAPI.getCollections();
+      setCollections(data);
+    } catch (error) {
+      setMessage('Failed to load collections');
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      file: e.target.files[0]
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.file || !formData.collection_id) {
+      setMessage('Please select a file and collection');
+      return;
+    }
+
+    setUploading(true);
+    setMessage('');
+
+    const submitData = new FormData();
+    submitData.append('title', formData.title);
+    submitData.append('author', formData.author);
+    submitData.append('description', formData.description);
+    submitData.append('collection_id', formData.collection_id);
+    submitData.append('file', formData.file);
+
+    try {
+      const result = await libraryAPI.uploadDocument(submitData);
+      if (result.success) {
+        setMessage('Document uploaded successfully!');
+        setFormData({
+          title: '',
+          author: '',
+          description: '',
+          collection_id: '',
+          file: null
+        });
+        document.getElementById('file-input').value = '';
+      } else {
+        setMessage('Upload failed: ' + (result.error || 'Unknown error'));
+      }
+    } catch (error) {
+      setMessage('Upload failed: ' + error.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div className="document-upload">
+      <h2>Upload Document</h2>
+      {message && <div className="message">{message}</div>}
+      
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Author:</label>
+          <input
+            type="text"
+            name="author"
+            value={formData.author}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            rows="3"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Collection:</label>
+          <select
+            name="collection_id"
+            value={formData.collection_id}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select a collection</option>
+            {collections.map(collection => (
+              <option key={collection.id} value={collection.id}>
+                {collection.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>File:</label>
+          <input
+            id="file-input"
+            type="file"
+            onChange={handleFileChange}
+            required
+          />
+        </div>
+
+        <button type="submit" disabled={uploading}>
+          {uploading ? 'Uploading...' : 'Upload Document'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default DocumentUpload;
+Search Component
+jsx
+// src/components/DocumentSearch.js
+import React, { useState } from 'react';
+import { libraryAPI } from '../services/api';
+
+const DocumentSearch = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState(null);
+  const [searching, setSearching] = useState(false);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+
+    setSearching(true);
+    try {
+      const data = await libraryAPI.search(query);
+      setResults(data);
+    } catch (error) {
+      console.error('Search failed:', error);
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const handleDownload = (bitstreamId, filename) => {
+    const downloadUrl = libraryAPI.downloadDocument(bitstreamId);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <div className="document-search">
+      <h2>Search Documents</h2>
+      
+      <form onSubmit={handleSearch} className="search-form">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search documents..."
+        />
+        <button type="submit" disabled={searching}>
+          {searching ? 'Searching...' : 'Search'}
+        </button>
+      </form>
+
+      {results && (
+        <div className="search-results">
+          <div className="results-summary">
+            Found {results.total_dspace} items in DSpace and {results.total_koha} records in Koha
+          </div>
+
+          {/* DSpace Results */}
+          <div className="results-section">
+            <h3>Digital Files (DSpace)</h3>
+            {results.dspace.length === 0 ? (
+              <p>No digital files found</p>
+            ) : (
+              results.dspace.map(item => (
+                <div key={item.id} className="result-item">
+                  <h4>{item.name}</h4>
+                  <p>Handle: {item.handle}</p>
+                  {item.bitstreams && item.bitstreams.length > 0 && (
+                    <button
+                      onClick={() => handleDownload(item.bitstreams[0].id, item.name)}
+                    >
+                      Download
+                    </button>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Koha Results */}
+          <div className="results-section">
+            <h3>Catalog Records (Koha)</h3>
+            {results.koha.length === 0 ? (
+              <p>No catalog records found</p>
+            ) : (
+              results.koha.map(record => (
+                <div key={record.biblio_id} className="result-item">
+                  <h4>{record.title}</h4>
+                  <p>Author: {record.author}</p>
+                  <p>ID: {record.biblio_id}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default DocumentSearch;
+Main App Component
+jsx
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import DocumentUpload from './components/DocumentUpload';
+import DocumentSearch from './components/DocumentSearch';
+import { libraryAPI } from './services/api';
+import './App.css';
+
+function App() {
+  const [status, setStatus] = useState(null);
+  const [activeTab, setActiveTab] = useState('search');
+
+  useEffect(() => {
+    checkStatus();
+  }, []);
+
+  const checkStatus = async () => {
+    try {
+      const data = await libraryAPI.getStatus();
+      setStatus(data);
+    } catch (error) {
+      console.error('Status check failed:', error);
+    }
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Digital Library System</h1>
+        {status && (
+          <div className="status-indicators">
+            <span className={`status ${status.dspace ? 'online' : 'offline'}`}>
+              DSpace: {status.dspace ? 'Online' : 'Offline'}
+            </span>
+            <span className={`status ${status.dspace_authenticated ? 'online' : 'offline'}`}>
+              DSpace Auth: {status.dspace_authenticated ? 'OK' : 'Failed'}
+            </span>
+            <span className={`status ${status.koha ? 'online' : 'offline'}`}>
+              Koha: {status.koha ? 'Online' : 'Offline'}
+            </span>
+          </div>
+        )}
+      </header>
+
+      <nav className="tabs">
+        <button 
+          className={activeTab === 'search' ? 'active' : ''}
+          onClick={() => setActiveTab('search')}
+        >
+          Search
+        </button>
+        <button 
+          className={activeTab === 'upload' ? 'active' : ''}
+          onClick={() => setActiveTab('upload')}
+        >
+          Upload
+        </button>
+      </nav>
+
+      <main className="main-content">
+        {activeTab === 'search' && <DocumentSearch />}
+        {activeTab === 'upload' && <DocumentUpload />}
+      </main>
+    </div>
+  );
+}
+
+export default App;
+Step 14: CSS Styling
+css
+/* src/App.css */
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App-header {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.status-indicators {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.status.online {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.offline {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.document-upload,
+.document-search {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.results-section {
+  margin-bottom: 30px;
+}
+
+.result-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.result-item h4 {
+  margin: 0 0 10px 0;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+Step 15: Django Settings and Configuration
+python
+# settings.py - Add these
+INSTALLED_APPS = [
+    # ... your existing apps
+    'corsheaders',  # Add this for React integration
+    'your_app_name',
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Add this at the top
+    # ... other middleware
+]
+
+# CORS settings for React development
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React development server
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+# File upload settings
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
+
+# DSpace and Koha configuration
+DSPACE_CONFIG = {
+    'REST_URL': 'http://localhost:8080/server',
+    'USERNAME': 'admin@dspace.org',  # Change to your DSpace admin email
+    'PASSWORD': 'admin',  # Change to your DSpace admin password
+}
+
+KOHA_CONFIG = {
+    'API_URL': 'http://127.0.0.1:8085/api/v1',
+    'API_KEY': 'your-koha-api-key-here',  # Generate this in Koha admin
+}
+Step 16: Installation and Setup Commands
+bash
+# Install CORS headers package
+pip install django-cors-headers
+
+# Apply migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# Create superuser for Django admin (if needed)
+python manage.py createsuperuser
+
+# Start Django development server
+python manage.py runserver
+
+# In another terminal, start React app
+cd frontend
+npm start
+Step 17: Testing the Complete System
+Test DSpace Connection:
+
+bash
+python manage.py test_dspace
+Test API Endpoints:
+
+bash
+# Check status
+curl http://localhost:8000/api/status/
+
+# List collections
+curl http://localhost:8000/api/collections/
+
+# Search
+curl "http://localhost:8000/api/search/?q=test"
+Test React App:
+
+Open http://localhost:3000
+
+Check status indicators
+
+Try uploading a document
+
+Search for documents
+
+Step 18: Production Considerations
+Environment Variables
+Create a .env file:
+
+env
+DSRACE_REST_URL=http://localhost:8080/server
+DSPACE_USERNAME=admin@dspace.org
+DSPACE_PASSWORD=admin
+KOHA_API_URL=http://127.0.0.1:8085/api/v1
+KOHA_API_KEY=your-actual-api-key
+Error Handling and Logging
+python
+# Add to settings.py
+import logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'dspace_integration.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+Your integration is now complete! The system provides:
+
+File Storage: DSpace handles digital file storage
+
+Cataloging: Koha manages bibliographic records
+
+Search: Combined search across both systems
+
+User Management: Your existing Django user system
+
+Modern UI: React frontend with your existing design
+
+The integration allows users to upload documents (which get stored in DSpace and cataloged in Koha) and search across both systems through a single interface.

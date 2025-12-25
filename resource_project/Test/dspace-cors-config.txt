@@ -1,0 +1,12 @@
+# Add these lines to your DSpace local.cfg file
+# Usually located at: [dspace]/config/local.cfg
+
+# CORS Configuration
+rest.cors.allowed-origins = http://localhost:3000
+rest.cors.allowed-methods = GET,POST,PUT,DELETE,PATCH,OPTIONS
+rest.cors.allowed-headers = Content-Type,Authorization,X-Requested-With,Accept,Origin
+rest.cors.allow-credentials = true
+rest.cors.max-age = 3600
+
+# Alternative: Allow all origins (less secure, for development only)
+# rest.cors.allowed-origins = *

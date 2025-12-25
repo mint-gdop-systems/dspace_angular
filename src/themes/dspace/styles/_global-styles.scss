@@ -1,0 +1,60 @@
+// Add any global css for the theme here
+
+// imports the base global style
+@import '../../../styles/_global-styles.scss';
+
+// Browse navigation styling
+.comcol-browse nav,
+.list-group-horizontal,
+nav[aria-label*="Browse"],
+nav.comcol-browse {
+  background-color: #0C2B4E !important;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  
+  .list-group-item {
+    background-color: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    
+    &:hover, &:focus {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      color: #f0f0f0 !important;
+    }
+    
+    &.active {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+      color: #fff !important;
+    }
+  }
+  
+  .form-select {
+    background-color: #0C2B4E !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    
+    option {
+      background-color: #0C2B4E !important;
+      color: #fff !important;
+    }
+  }
+}
+
+.facet-filter, .setting-option, .advanced-search {
+  background-color: var(--bs-light);
+  border-radius: var(--bs-border-radius);
+
+  &.p-3 {
+    // Needs !important because the original bootstrap class uses it
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  .bg-secondary {
+    background-color: var(--bs-primary);
+  }
+
+  h4, .h4 {
+    font-size: 1.1rem
+  }
+}

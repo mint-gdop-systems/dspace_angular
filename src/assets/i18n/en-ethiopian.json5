@@ -1,0 +1,10 @@
+{
+  "home.title": "Ethiopian Archives and Library Services (wemezeker) Digital Items Portal",
+  "home.breadcrumbs": "Home",
+  "home.search-form.placeholder": "Search the repository ...",
+  "home.top-level-communities.head": "Browse Collections",
+  
+  "footer.copyright": "Ethiopian Archives and Library Services © 2002-{{ year }}",
+  "repository.title": "Ethiopian Archives and Library Services",
+  "repository.title.prefix": "Ethiopian Archives and Library Services :: "
+}

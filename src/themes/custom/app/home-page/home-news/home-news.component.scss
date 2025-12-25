@@ -1,0 +1,102 @@
+:host {
+  display: block;
+
+  .background-container {
+    background: linear-gradient(135deg, #0C2B4E 0%, #1A3D64 100%);
+    color: #F4F4F4;
+    min-height: 400px;
+  }
+
+  .home-content {
+    background-color: transparent;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #F4F4F4;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #F4F4F4;
+    opacity: 0.9;
+    margin-bottom: 0;
+  }
+
+  .intro-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #F4F4F4;
+    text-align: justify;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #F4F4F4;
+    margin-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(244, 244, 244, 0.3);
+    padding-bottom: 0.3rem;
+  }
+
+  .section-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #F4F4F4;
+    margin-bottom: 1rem;
+  }
+
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .collection-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid #F4F4F4;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #F4F4F4;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: #F4F4F4;
+      opacity: 0.9;
+      margin-bottom: 0;
+    }
+  }
+
+  .mission-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #F4F4F4;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+
+  a {
+    color: #F4F4F4;
+    text-decoration: underline;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}

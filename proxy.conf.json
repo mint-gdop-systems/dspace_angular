@@ -1,0 +1,11 @@
+{
+  "/api/koha/*": {
+    "target": "http://127.0.0.1:8085",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/koha": "/api/v1"
+    }
+  }
+}

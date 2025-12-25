@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="row bg-light p-4">
+    <div class="col-md-6">
+      <h1 class="display-4">እንኳን ወደ ኢትዮጵያ ቤተ መዛግብት እና ቤተ መጻሕፍት አገልግሎት (ወመዘክር) ዲጂታል መግቢያ በደህና መጡ</h1>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h5>የስራ ሰዓት</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>የቤተ መጻሕፍት ንባብ፡</strong></p>
+              <p>ከሰኞ - ቅዳሜ፡ 8:00AM - 6:00PM (22Hrs)<br>
+              እሁድ፡ 8:30AM - 6:00PM</p>
+              <p><strong>የቤተ መዛግብት ንባብ፡</strong></p>
+              <p>ከሰኞ - አርብ፡ 8:30AM - 5:30PM</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h5>አድራሻ</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>ስልክ፡</strong><br>
+              +251 11 5530058<br>
+              +251 11 5507950<br>
+              +251 11 5150882</p>
+              <p><strong>ኢሜይል፡</strong><br>
+              ILARMS&#64;nala.gov.et</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ds-home-coar></ds-home-coar>
+<ds-home-news></ds-home-news>
+@if (showDiscoverFilters) {
+  <ds-configuration-search-page
+    [sideBarWidth]="3"
+    [showViewModes]="false"
+    [searchEnabled]="false"
+    [inPlaceSearch]="false"
+    [showScopeSelector]="false">
+    <ng-container searchContentTop *ngTemplateOutlet="homeContent"></ng-container>
+  </ds-configuration-search-page>
+}
+@if (!showDiscoverFilters) {
+  <div class="container">
+    <ng-container *ngTemplateOutlet="homeContent"></ng-container>
+  </div>
+}
+<ds-suggestions-popup></ds-suggestions-popup>
+
+<ng-template #homeContent>
+  <ds-search-form [inPlaceSearch]="false"
+    [searchPlaceholder]="'ፈልግ...'">
+  </ds-search-form>
+  <ds-top-level-community-list></ds-top-level-community-list>
+  @if (recentSubmissionspageSize>0) {
+    <ds-recent-item-list></ds-recent-item-list>
+  }
+  <ds-koha-items></ds-koha-items>
+</ng-template>
