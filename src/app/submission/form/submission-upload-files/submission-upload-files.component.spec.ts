@@ -41,6 +41,8 @@ import { UploaderOptions } from '../../../shared/upload/uploader/uploader-option
 import { SectionsService } from '../../sections/sections.service';
 import { SubmissionService } from '../../submission.service';
 import { SubmissionUploadFilesComponent } from './submission-upload-files.component';
+import { SectionUploadService } from '../../sections/upload/section-upload.service';
+import { FilePreviewPanelComponent } from '../../../shared/upload/file-preview-panel/file-preview-panel.component';
 
 describe('SubmissionUploadFilesComponent Component', () => {
 
@@ -62,6 +64,10 @@ describe('SubmissionUploadFilesComponent Component', () => {
     select: jasmine.createSpy('select'),
   });
 
+  const sectionUploadServiceStub = jasmine.createSpyObj('SectionUploadService', {
+    getUploadedFilesData: of({ files: [] }),
+  });
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -76,6 +82,7 @@ describe('SubmissionUploadFilesComponent Component', () => {
         { provide: TranslateService, useValue: getMockTranslateService() },
         { provide: SubmissionJsonPatchOperationsService, useValue: submissionJsonPatchOperationsServiceStub },
         { provide: Store, useValue: store },
+        { provide: SectionUploadService, useValue: sectionUploadServiceStub },
         ChangeDetectorRef,
         SubmissionUploadFilesComponent,
       ],
@@ -121,7 +128,7 @@ describe('SubmissionUploadFilesComponent Component', () => {
       translateService = TestBed.inject(TranslateService);
       comp.submissionId = submissionId;
       comp.collectionId = collectionId;
-      comp.uploadFilesOptions = Object.assign(new UploaderOptions(),{
+      comp.uploadFilesOptions = Object.assign(new UploaderOptions(), {
         url: '',
         authToken: null,
         disableMultipart: false,

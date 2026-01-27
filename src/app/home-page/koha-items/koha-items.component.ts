@@ -10,7 +10,7 @@ import { KohaService, KohaItem } from '../../core/koha/koha.service';
   template: `
     <div class="mt-4">
       <div class="d-flex flex-row border-bottom mb-4 pb-4"></div>
-      <h2>Recent Koha Items</h2>
+      
       <div *ngIf="kohaItems$ | async as items; else loading">
         <ul class="list-unstyled m-0 p-0" *ngIf="items.length > 0; else noItems">
           <li class="my-4" *ngFor="let item of items">
@@ -22,7 +22,7 @@ import { KohaService, KohaItem } from '../../core/koha/koha.service';
           </li>
         </ul>
         <ng-template #noItems>
-          <p class="text-muted">No Koha items available.</p>
+          
         </ng-template>
       </div>
       <ng-template #loading>

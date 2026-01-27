@@ -25,6 +25,11 @@ export const ROUTES: Route[] = [
         path: '',
         component: ThemedSiteStatisticsPageComponent,
       },
+      {
+        path: 'admin-dashboard',
+        loadComponent: () => import('../admin/admin-dashboard-page/admin-dashboard-page.component').then((m) => m.AdminDashboardPageComponent),
+        canActivate: [statisticsAdministratorGuard],
+      },
     ],
     canActivate: [statisticsAdministratorGuard],
   },

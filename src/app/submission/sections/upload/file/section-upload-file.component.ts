@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   Component,
   Input,
@@ -47,6 +47,7 @@ import { SubmissionSectionUploadFileViewComponent } from './view/section-upload-
   imports: [
     AsyncPipe,
     BtnDisabledDirective,
+    CommonModule,
     SubmissionSectionUploadFileViewComponent,
     ThemedFileDownloadLinkComponent,
     TranslateModule,

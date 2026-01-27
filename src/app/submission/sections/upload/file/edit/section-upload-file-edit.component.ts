@@ -4,8 +4,10 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  Input,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UntypedFormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -81,11 +83,12 @@ import {
     BtnDisabledDirective,
     FormComponent,
     TranslateModule,
+    CommonModule,
   ],
   standalone: true,
 })
 export class SubmissionSectionUploadFileEditComponent
-implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy {
 
   /**
    * The FormComponent reference
@@ -273,7 +276,7 @@ implements OnInit, OnDestroy {
   public setOptions(model: DynamicFormControlModel, control: UntypedFormControl) {
     let accessCondition: AccessConditionOption = null;
     this.availableAccessConditionOptions.filter((element) => element.name === control.value)
-      .forEach((element) => accessCondition = element );
+      .forEach((element) => accessCondition = element);
     if (isNotEmpty(accessCondition)) {
       const startDateControl: UntypedFormControl = control.parent.get('startDate') as UntypedFormControl;
       const endDateControl: UntypedFormControl = control.parent.get('endDate') as UntypedFormControl;
@@ -292,7 +295,15 @@ implements OnInit, OnDestroy {
    * Dispatch form model init
    */
   ngOnInit() {
-    if (this.fileData && this.formId) {
+    this.buildForm();
+  }
+
+  ngOnChanges() {
+    this.buildForm();
+  }
+
+  private buildForm() {
+    if (this.fileData && this.formId && !this.formModel) {
       this.formModel = this.buildFileEditForm();
       this.cdr.detectChanges();
     }

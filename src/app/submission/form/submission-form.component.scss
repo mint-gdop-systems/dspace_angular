@@ -2,7 +2,7 @@
   background-color: rgba(255, 255, 255, .97);
   padding: calc(var(--bs-spacer) / 2) 0 calc(var(--bs-spacer) / 2) 0;
   top: 0;
-  z-index: var(--ds-submission-header-z-index);
+  z-index: 10;
 }
 
 .submission-form-header-item {
@@ -14,26 +14,36 @@
   bottom: 0;
   background-color: var(--bs-gray-400);
   padding: calc(var(--bs-spacer) / 2);
-  z-index: var(--ds-submission-footer-z-index);
+  z-index: 5;
 }
 
 .btn-link-focus {
-  // behave as btn-link but does not override box-shadow of btn-link:focus
-  font-weight: $font-weight-normal;
-  color: $link-color;
-  text-decoration: $link-decoration;
+  font-weight: normal;
+  color: var(--bs-link-color);
+  text-decoration: none;
+
   &:hover {
-    color: $link-hover-color;
-    text-decoration: $link-hover-decoration;
-  }
-  &:disabled,
-  &.disabled {
-    color: $btn-link-disabled-color;
-    pointer-events: none;
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
   }
 
-  &:focus,
-  &.focus {
-    text-decoration: $link-hover-decoration;
+  &:disabled,
+  &.disabled {
+    color: var(--bs-gray-600);
+    pointer-events: none;
   }
+}
+
+.submission-form-content {
+  padding-right: 2rem;
+  border-right: 1px solid var(--bs-gray-300);
+}
+
+.pdf-container {
+  overflow: hidden;
+}
+
+iframe {
+  border: none;
+  border-radius: 4px;
 }

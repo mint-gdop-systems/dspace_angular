@@ -788,6 +788,29 @@
   "admin.workflow.item.policies": "Policies",
 
   "admin.workflow.item.supervision": "Supervision",
+  "admin.dashboard.title": "Admin Statistics Dashboard",
+  "admin.dashboard.refresh": "Refresh Data",
+  "admin.dashboard.communities": "Communities",
+  "admin.dashboard.collections": "Collections",
+  "admin.dashboard.archived-items": "Archived Items",
+  "admin.dashboard.total-files": "Total Files",
+  "admin.dashboard.workflow-items": "Workflow Items",
+  "admin.dashboard.workflow-tasks": "Workflow Tasks",
+  "admin.dashboard.workspace-items": "Awaiting Submission",
+  "admin.dashboard.collection-name": "Collection Name",
+  "admin.dashboard.statistics.collections": "Collection Statistics",
+  "admin.dashboard.no-data": "No collection statistics available.",
+  "admin.dashboard.task-id": "Task ID",
+  "admin.dashboard.task-type": "Type",
+  "admin.dashboard.action": "Action",
+  "admin.dashboard.view-task": "View Details",
+  "admin.dashboard.no-tasks": "No workflow tasks pending approval.",
+  "admin.dashboard.recent-submissions": "Recent Submissions",
+  "admin.dashboard.no-recent": "No recent items found.",
+  "admin.dashboard.collection-stats": "Top Collections by Size",
+  "admin.dashboard.no-collection-stats": "No collection statistics available.",
+  "menu.section.admin-dashboard": "Admin Dashboard",
+  "menu.section.analytics": "Analytics",
 
   "admin.metadata-import.breadcrumbs": "Import Metadata",
 
@@ -2209,7 +2232,7 @@
 
   "home.title": "Home",
 
-  "home.top-level-communities.head": "Vital Events",
+  "home.top-level-communities.head": "Recent Items",
 
   "home.top-level-communities.help": "Select a community to browse its collections.",
 
@@ -3564,6 +3587,18 @@
   "menu.section.registries_metadata": "Metadata",
 
   "menu.section.statistics": "Statistics",
+  "menu.section.admin-dashboard": "Admin Dashboard",
+  "admin.dashboard.title": "Admin Dashboard",
+  "admin.dashboard.refresh": "Refresh Data",
+  "admin.dashboard.statistics.archived-items": "Total Archived Items",
+  "admin.dashboard.statistics.bitstreams": "Total Archived Bitstreams",
+  "admin.dashboard.statistics.rejected-workflow": "Rejected Workflow Items",
+  "admin.dashboard.statistics.awaiting-approval": "Tasks Awaiting Approval",
+  "admin.dashboard.statistics.by-collection": "Items by Collection",
+  "admin.dashboard.workflow.task.id": "ID",
+  "admin.dashboard.workflow.task.item": "Item",
+  "admin.dashboard.workflow.task.action": "Action",
+  "admin.dashboard.workflow.task.view": "View Task",
 
   "menu.section.statistics_task": "Statistics Task",
 
@@ -5607,6 +5642,11 @@
   "submission.sections.upload.download.title": "Download bitstream",
 
   "submission.sections.upload.drop-message": "Drop files to attach them to the item",
+  "submission.sections.upload.preview.select-file": "Select file to preview",
+  "submission.sections.upload.preview.pdf-not-supported": "Your browser does not support native PDF preview. You can download the file here:",
+  "submission.sections.upload.preview.unsupported-format": "Preview not available for this file format. Use the link below to download.",
+  "submission.sections.upload.preview.no-file-selected": "No file selected for preview.",
+  "submission.sections.upload.uploaded-files-list": "Uploaded Files",
 
   "submission.sections.upload.edit.title": "Edit bitstream",
 

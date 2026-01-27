@@ -1,11 +1,13 @@
 
+import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
   OnChanges,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
   of,
@@ -31,6 +33,9 @@ import { SectionsService } from '../../sections/sections.service';
 import { SectionsType } from '../../sections/sections-type';
 import { SubmissionService } from '../../submission.service';
 import parseSectionErrors from '../../utils/parseSectionErrors';
+import { SectionUploadService } from '../../sections/upload/section-upload.service';
+import { FilePreviewPanelComponent } from '../../../shared/upload/file-preview-panel/file-preview-panel.component';
+import { WorkspaceitemSectionUploadObject } from '../../../core/submission/models/workspaceitem-section-upload.model';
 
 /**
  * This component represents the drop zone that provides to add files to the submission.
@@ -38,12 +43,18 @@ import parseSectionErrors from '../../utils/parseSectionErrors';
 @Component({
   selector: 'ds-base-submission-upload-files',
   templateUrl: './submission-upload-files.component.html',
+  styleUrls: ['./submission-upload-files.component.scss'],
   imports: [
     UploaderComponent,
+    FilePreviewPanelComponent,
+    CommonModule,
+    TranslateModule
   ],
   standalone: true,
 })
-export class SubmissionUploadFilesComponent implements OnChanges, OnDestroy {
+export class SubmissionUploadFilesComponent implements OnInit, OnChanges, OnDestroy {
+  public fileList: any[] = [];
+  public selectedFile: any = null;
 
   /**
    * The collection id this submission belonging to
@@ -116,10 +127,32 @@ export class SubmissionUploadFilesComponent implements OnChanges, OnDestroy {
    * @param {TranslateService} translate
    */
   constructor(private notificationsService: NotificationsService,
-              private operationsService: SubmissionJsonPatchOperationsService,
-              private sectionService: SectionsService,
-              private submissionService: SubmissionService,
-              private translate: TranslateService) {
+    private operationsService: SubmissionJsonPatchOperationsService,
+    private sectionService: SectionsService,
+    private submissionService: SubmissionService,
+    private translate: TranslateService,
+    private uploadService: SectionUploadService) {
+  }
+
+  ngOnInit() {
+    this.subs.push(
+      this.uploadService.getUploadedFilesData(this.submissionId, 'upload')
+        .subscribe((uploadData: WorkspaceitemSectionUploadObject) => {
+          console.log('SubmissionUploadFilesComponent: uploadData', uploadData);
+          if (uploadData && uploadData.files) {
+            // Ensure fileList is always an array
+            this.fileList = Array.isArray(uploadData.files) ? uploadData.files : Object.values(uploadData.files);
+            console.log('SubmissionUploadFilesComponent: fileList', this.fileList);
+            if (!this.selectedFile && this.fileList.length > 0) {
+              this.selectedFile = this.fileList[0];
+            }
+          }
+        })
+    );
+  }
+
+  onFileSelectedForPreview(file: any) {
+    this.selectedFile = file;
   }
 
   /**

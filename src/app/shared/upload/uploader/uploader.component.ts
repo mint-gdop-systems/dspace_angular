@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpXsrfTokenExtractor } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -44,6 +44,7 @@ import { UploaderProperties } from './uploader-properties.model';
   encapsulation: ViewEncapsulation.Emulated,
   standalone: true,
   imports: [
+    AsyncPipe,
     BtnDisabledDirective,
     CommonModule,
     FileUploadModule,
@@ -165,7 +166,7 @@ export class UploaderComponent implements OnInit, AfterViewInit {
       this.onFileSelected.emit(items);
     });
     if (isUndefined(this.onBeforeUpload)) {
-      this.onBeforeUpload = () => {return;};
+      this.onBeforeUpload = () => { return; };
     }
     this.uploader.onBeforeUploadItem = (item) => {
       if (item.url !== this.uploader.options.url) {
