@@ -1986,7 +1986,7 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
-  "footer.copyright": "Ethiopian Vital Events Registration System © 2002-{{ year }}",
+  "footer.copyright": "Civil Registration and Residency Service Agency © 2002-{{ year }}",
 
   "footer.link.accessibility": "Accessibility settings",
 
