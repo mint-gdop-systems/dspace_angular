@@ -8,13 +8,11 @@
 
 import { Injectable } from '@angular/core';
 import {
-    combineLatest,
-    map,
     Observable,
+    of
 } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { MenuItemType } from '../menu-item-type.model';
 import {
     AbstractMenuProvider,
@@ -34,23 +32,17 @@ export class AdminDashboardMenuProvider extends AbstractMenuProvider {
     }
 
     public getSections(): Observable<PartialMenuSection[]> {
-        return combineLatest([
-            this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-        ]).pipe(
-            map(([authorized]) => {
-                return [
-                    {
-                        id: 'admin-dashboard',
-                        visible: authorized,
-                        model: {
-                            type: MenuItemType.LINK,
-                            text: 'menu.section.analytics',
-                            link: '/statistics/admin-dashboard',
-                        },
-                        icon: 'chart-bar',
-                    },
-                ];
-            }),
-        );
+        return of([
+            {
+                id: 'admin-dashboard',
+                visible: true,
+                model: {
+                    type: MenuItemType.LINK,
+                    text: 'menu.section.analytics',
+                    link: '/statistics/admin-dashboard',
+                },
+                icon: 'chart-bar',
+            },
+        ]);
     }
 }

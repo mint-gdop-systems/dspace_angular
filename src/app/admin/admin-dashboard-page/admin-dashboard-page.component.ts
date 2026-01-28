@@ -8,8 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
     combineLatest,
     Observable,
-    of,
-    zip,
+    of
 } from 'rxjs';
 import {
     map,
@@ -21,30 +20,24 @@ import {
 
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { CollectionDataService } from '../../core/data/collection-data.service';
-import { FindListOptions } from '../../core/data/find-list-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { followLink } from '../../shared/utils/follow-link-config.model';
-import { Bitstream } from '../../core/shared/bitstream.model';
 import { Collection } from '../../core/shared/collection.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { SearchService } from '../../core/shared/search/search.service';
-import { MyDSpaceResponseParsingService } from '../../core/data/mydspace-response-parsing.service';
-import { MyDSpaceRequest } from '../../core/data/request.models';
 import { ClaimedTaskDataService } from '../../core/tasks/claimed-task-data.service';
 import { PoolTaskDataService } from '../../core/tasks/pool-task-data.service';
 import { WorkflowItemDataService } from '../../core/submission/workflowitem-data.service';
 import { WorkspaceitemDataService } from '../../core/submission/workspaceitem-data.service';
-import { Context } from '../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
 import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { WorkflowItem } from '../../core/submission/models/workflowitem.model';
-import { PoolTask } from '../../core/tasks/models/pool-task-object.model';
-import { ClaimedTask } from '../../core/tasks/models/claimed-task-object.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 
 @Component({
     selector: 'ds-admin-dashboard-page',
@@ -55,6 +48,7 @@ import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
         CommonModule,
         RouterModule,
         TranslateModule,
+        UserDashboardComponent,
     ],
 })
 export class AdminDashboardPageComponent implements OnInit {
@@ -63,6 +57,10 @@ export class AdminDashboardPageComponent implements OnInit {
     archivedItemsCount$: Observable<number>;
     workflowItemsCount$: Observable<number>;
     collectionsStats$: Observable<any[]>;
+
+    isAdmin$: Observable<boolean>;
+
+    activeTab: 'admin' | 'user' = 'admin';
 
     constructor(
         protected searchService: SearchService,
@@ -73,9 +71,20 @@ export class AdminDashboardPageComponent implements OnInit {
         protected claimedTaskDataService: ClaimedTaskDataService,
         protected collectionDataService: CollectionDataService,
         protected halService: HALEndpointService,
+        protected authorizationService: AuthorizationDataService,
     ) { }
 
     ngOnInit(): void {
+        this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+            shareReplay(1)
+        );
+
+        this.isAdmin$.pipe(take(1)).subscribe((isAdmin) => {
+            if (!isAdmin) {
+                this.activeTab = 'user';
+            }
+        });
+
         this.refresh();
     }
 
