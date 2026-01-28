@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 
+import { authenticatedGuard } from '../core/auth/authenticated.guard';
 import { collectionPageResolver } from '../collection-page/collection-page.resolver';
 import { communityPageResolver } from '../community-page/community-page.resolver';
 import { i18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
@@ -27,8 +28,15 @@ export const ROUTES: Route[] = [
       },
       {
         path: 'admin-dashboard',
+        resolve: {
+          breadcrumb: i18nBreadcrumbResolver,
+        },
+        data: {
+          title: 'admin.dashboard.title',
+          breadcrumbKey: 'admin.dashboard',
+        },
         loadComponent: () => import('../admin/admin-dashboard-page/admin-dashboard-page.component').then((m) => m.AdminDashboardPageComponent),
-        canActivate: [statisticsAdministratorGuard],
+        canActivate: [authenticatedGuard],
       },
     ],
     canActivate: [statisticsAdministratorGuard],

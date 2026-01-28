@@ -798,6 +798,8 @@
   "admin.dashboard.workflow-tasks": "Workflow Tasks",
   "admin.dashboard.workspace-items": "Awaiting Submission",
   "admin.dashboard.collection-name": "Collection Name",
+  "admin.dashboard.user-dashboard": "User Dashboard",
+  "admin.dashboard.admin-dashboard": "Admin Dashboard",
   "admin.dashboard.statistics.collections": "Collection Statistics",
   "admin.dashboard.no-data": "No collection statistics available.",
   "admin.dashboard.task-id": "Task ID",
