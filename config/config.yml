@@ -8,6 +8,15 @@ languages:
     label: አማርኛ
     active: true
 
+themes:
+  - name: crrsa
+
 info:
   enableEndUserAgreement: false
   enablePrivacyStatement: false
+  enableCOARNotifySupport: true
+
+comcolSelectionSort:
+  sortField: 'crvs.identifier.houseFamilyKey'
+  sortDirection: 'ASC'
+  

@@ -1,0 +1,10 @@
+<h1 class="item-page-title-field">
+  @if (item.firstMetadataValue('dspace.entity.type'); as type) {
+    <div class="d-inline">
+      {{ type.toLowerCase() + '.page.titleprefix' | translate }}
+    </div>
+  }
+  @if (item.firstMetadataValue('crvs.identifier.houseFamilyKey'); as houseFamilyKey) {
+    <span class="dont-break-out">{{ houseFamilyKey }}</span>
+  }
+</h1>

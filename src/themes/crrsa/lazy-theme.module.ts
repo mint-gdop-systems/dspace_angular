@@ -1,41 +1,40 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { CommonModule } from "@angular/common";
 import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
-import { TranslateModule } from '@ngx-translate/core';
-import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+	provideHttpClient,
+	withInterceptorsFromDi,
+} from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { StoreModule } from "@ngrx/store";
+import { TranslateModule } from "@ngx-translate/core";
+import { ScrollToModule } from "@nicky-lenaers/ngx-scroll-to";
 
-import { RootModule } from '../../app/root.module';
+import { ItemPageTitleFieldComponent } from "src/themes/crrsa/app/item-page/simple/field-components/specific-field/title/item-page-title-field.component";
+import { RootModule } from "../../app/root.module";
 
-const DECLARATIONS = [
-];
+const DECLARATIONS = [];
 
 @NgModule({
-  declarations: DECLARATIONS,
-  imports: [
-    RootModule,
-    CommonModule,
-    DragDropModule,
-    FormsModule,
-    NgbModule,
-    RouterModule,
-    ScrollToModule,
-    StoreModule,
-    StoreRouterConnectingModule,
-    TranslateModule,
-    FormsModule,
-  ],
-  providers: [
-    provideHttpClient(withInterceptorsFromDi()),
-  ],
+	declarations: DECLARATIONS,
+	imports: [
+		RootModule,
+		CommonModule,
+		DragDropModule,
+		FormsModule,
+		NgbModule,
+		RouterModule,
+		ScrollToModule,
+		StoreModule,
+		StoreRouterConnectingModule,
+		TranslateModule,
+		FormsModule,
+		ItemPageTitleFieldComponent,
+	],
+	providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 
 /**
@@ -45,5 +44,4 @@ const DECLARATIONS = [
  * It is purposefully not exported, it should never be imported anywhere else, its only purpose is
  * to give lazily loaded components a context in which they can be compiled successfully
  */
-class LazyThemeModule {
-}
+class LazyThemeModule {}
