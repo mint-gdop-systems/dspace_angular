@@ -2912,11 +2912,11 @@
 
   "confidence.indicator.help-text.unknown": "Unknown confidence value",
 
-  "item.page.abstract": "Abstract",
+  "item.page.abstract": "Family Summary",
 
   "item.page.author": "Author",
 
-  "item.page.authors": "Authors",
+  "item.page.authors": "የቤተሰብ ተጠሪ",
 
   "item.page.citation": "Citation",
 
@@ -2926,7 +2926,7 @@
 
   "item.page.collections.load-more": "Load more",
 
-  "item.page.date": "Date",
+  "item.page.date": "Registration Date",
 
   "item.page.edit": "Edit this item",
 
@@ -7249,4 +7249,12 @@
   "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
 
   "file-download-link.request-copy": "Request a copy of ",
+
+  "search.filters.filter.dateRegistered.head": "Registration Date",
+
+  "search.filters.filter.dateRegistered.min.label": "Maximun Date",
+
+  "search.filters.filter.dateRegistered.max.label": "Minimum Date",
+
+  "search.filters.filter.familyHead.head": "Family Head"
 }

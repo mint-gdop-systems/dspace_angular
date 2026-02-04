@@ -38,6 +38,7 @@ export class ItemPageDateFieldComponent extends ItemPageFieldComponent {
      * In this component, we want to display values for metadata 'dc.date.issued'
      */
     fields: string[] = [
+      'crvs.date.registration',
       'dc.date.issued',
     ];
 
