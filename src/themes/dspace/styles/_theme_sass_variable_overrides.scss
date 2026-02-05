@@ -45,14 +45,14 @@ $font-family-sans-serif: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI"
 //$cyan:    #17a2b8 !default;
 
 // Override semantic colors here
-$primary:   #43515f;  // Gray
-$secondary: #495057;  // As Bootstrap $gray-700
-$success:   #92c642;  // Lime
-$info:      #1e6f90;  // Light blue
-$warning:   #ec9433;  // Orange
-$danger:    #cf4444;  // Red
-$light:     #f8f9fa;  // As Bootstrap $gray-100
-$dark:      #43515f;  // Dark blue
+$primary:   #073c59;  // Brand primary (logo)
+$secondary: #3f5f72;  // Muted steel blue
+$success:   #7bbf4b;  // Balanced green
+$info:      #2c7da0;  // Brand-compatible cyan-blue
+$warning:   #e39b3b;  // Warm amber
+$danger:    #c44141;  // Clear red
+$light:     #f6f8fa;  // Soft off-white
+$dark:      #041f2d;  // Deep navy
 
 // Add new semantic colors here (you don't need to add existing semantic colors)
 $theme-custom-semantic-colors: (
@@ -60,37 +60,37 @@ $theme-custom-semantic-colors: (
 
 /*** OTHER BOOTSTRAP VARIABLES ***/
 
-$min-contrast-ratio: 2.06 !default;
+$min-contrast-ratio: 3 !default;
 
-$body-color: #343a40;       // As Bootstrap $gray-800
+$body-color: #24343f;
 
-$link-color: #1e6f90;       // Blue green, as DSpace $info
+$link-color: #2c7da0;
 $link-decoration: none;
-$link-hover-color: darken($link-color, 15%);
+$link-hover-color: darken($link-color, 12%);
 $link-hover-decoration: underline;
 
-$table-accent-bg: #f8f9fa;  // As Bootstrap $gray-100
-$table-hover-bg: #ced4da;   // As Bootstrap $gray-400
+$table-accent-bg: #f2f5f7;
+$table-hover-bg: #d6e1e8;
 
 $navbar-dark-color: #fff;
 
 
 /*** CUSTOM DSPACE VARIABLES ***/
 
-$ds-home-news-link-color: #D2FC93;
+$ds-home-news-link-color: #9fe870;
 $ds-header-navbar-border-bottom-color: transparent;
 
-$ds-breadcrumb-link-color: #154E66 !default;
-$ds-breadcrumb-link-active-color: #040D11 !default;
+$ds-breadcrumb-link-color: #1f6b8a !default;
+$ds-breadcrumb-link-active-color: #041f2d !default;
 
-// Navigation colors - match hero section
-$ds-header-bg: #0C2B4E;
-$ds-navbar-bg: #0C2B4E;
-$ds-navbar-dropdown-bg: #0C2B4E;
-$ds-expandable-navbar-bg: #0C2B4E;
-$ds-navbar-link-color: #fff;
-$ds-navbar-link-color-hover: #f0f0f0;
+// Navigation colors - aligned to brand
+$ds-header-bg: #073c59;
+$ds-navbar-bg: #073c59;
+$ds-navbar-dropdown-bg: #073c59;
+$ds-expandable-navbar-bg: #073c59;
+$ds-navbar-link-color: #ffffff;
+$ds-navbar-link-color-hover: #8dc6e0;
 
 // Browse navigation colors
-$ds-browse-nav-bg: #0C2B4E;
-$ds-browse-nav-link-color: #fff;
+$ds-browse-nav-bg: #073c59;
+$ds-browse-nav-link-color: #ffffff;

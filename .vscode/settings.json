@@ -2,6 +2,14 @@
 	"typescript.check.workspaceVersion": false,
 	"i18n-ally.localesPaths": ["src/assets/i18n", "src/app/core/locale"],
 	"typescript.tsdk": "node_modules\\typescript\\lib",
-	"cSpell.words": ["crrsa", "Woreda", "Woredas"],
-	"conventionalCommits.scopes": ["home-page", "i18n"]
+	"cSpell.words": [
+		"COAR",
+		"comcol",
+		"crrsa",
+		"crvs",
+		"Woreda",
+		"Woredas",
+		"አማርኛ"
+	],
+	"conventionalCommits.scopes": ["home-page", "i18n", "item-page"]
 }
