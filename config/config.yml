@@ -1,3 +1,9 @@
+rest:
+  ssl: false
+  host: localhost
+  port: 8080
+  nameSpace: /server
+
 defaultLanguage: en-crrsa
 
 languages:
@@ -14,6 +20,6 @@ info:
   enableCOARNotifySupport: true
 
 comcolSelectionSort:
-  sortField: 'crvs.identifier.houseFamilyKey'
+  sortField: 'dc.title'
   sortDirection: 'ASC'
   

@@ -32,6 +32,7 @@ import { environment } from '../../environments/environment';
 import { ThemedAdminSidebarComponent } from '../admin/admin-sidebar/themed-admin-sidebar.component';
 import { getPageInternalServerErrorRoute } from '../app-routing-paths';
 import { ThemedBreadcrumbsComponent } from '../breadcrumbs/themed-breadcrumbs.component';
+import { AuthService } from '../core/auth/auth.service';
 import {
   NativeWindowRef,
   NativeWindowService,
@@ -90,11 +91,22 @@ export class RootComponent implements OnInit {
    */
   @Input() shouldShowRouteLoader: boolean;
 
+  /**
+   * Observable to track if current route is the home page
+   */
+  isHomePage$: Observable<boolean>;
+
+  /**
+   * Observable to track if the navbar should be visible
+   */
+  shouldShowNavbar$: Observable<boolean>;
+
   constructor(
     private router: Router,
     private cssService: CSSVariableService,
     private menuService: MenuService,
     private windowService: HostWindowService,
+    private authService: AuthService,
     @Inject(NativeWindowService) private _window: NativeWindowRef,
   ) {
     this.notificationOptions = environment.notifications;
@@ -133,6 +145,20 @@ export class RootComponent implements OnInit {
     if (this.router.url === getPageInternalServerErrorRoute()) {
       this.shouldShowRouteLoader = false;
     }
+
+    // Track if we're on the home page
+    this.isHomePage$ = this.router.events.pipe(
+      startWith(null),
+      map(() => this.router.url === '/home' || this.router.url === '/'),
+    );
+
+    // Navbar should be visible if we're NOT on the home page, OR if we ARE but the user is authenticated.
+    this.shouldShowNavbar$ = combineLatestObservable([
+      this.isHomePage$,
+      this.authService.isAuthenticated(),
+    ]).pipe(
+      map(([isHome, isAuthenticated]) => !isHome || isAuthenticated),
+    );
   }
 
   skipToMainContent() {

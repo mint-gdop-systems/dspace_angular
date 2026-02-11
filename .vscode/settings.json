@@ -1,15 +1,22 @@
 {
 	"typescript.check.workspaceVersion": false,
-	"i18n-ally.localesPaths": ["src/assets/i18n", "src/app/core/locale"],
+	"i18n-ally.localesPaths": [
+		"src/assets/i18n",
+		"src/app/core/locale"
+	],
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"cSpell.words": [
 		"COAR",
 		"comcol",
 		"crrsa",
-		"crvs",
+		"legal",
 		"Woreda",
 		"Woredas",
 		"አማርኛ"
 	],
-	"conventionalCommits.scopes": ["home-page", "i18n", "item-page"]
+	"conventionalCommits.scopes": [
+		"home-page",
+		"i18n",
+		"item-page"
+	]
 }

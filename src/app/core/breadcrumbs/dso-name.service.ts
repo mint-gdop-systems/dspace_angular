@@ -31,34 +31,9 @@ export class DSONameService {
    * With only two exceptions those solutions seem overkill for now.
    */
   private readonly factories = {
-    EPerson: (dso: DSpaceObject): string => {
-      const firstName = dso.firstMetadataValue('eperson.firstname');
-      const lastName = dso.firstMetadataValue('eperson.lastname');
-      if (isEmpty(firstName) && isEmpty(lastName)) {
-        return this.translateService.instant('dso.name.unnamed');
-      } else if (isEmpty(firstName) || isEmpty(lastName)) {
-        return firstName || lastName;
-      } else {
-        return `${firstName} ${lastName}`;
-      }
-    },
-    Person: (dso: DSpaceObject): string => {
-      const familyName = dso.firstMetadataValue('person.familyName');
-      const givenName = dso.firstMetadataValue('person.givenName');
-      if (isEmpty(familyName) && isEmpty(givenName)) {
-        return dso.firstMetadataValue('dc.title') || this.translateService.instant('dso.name.unnamed');
-      } else if (isEmpty(familyName) || isEmpty(givenName)) {
-        return familyName || givenName;
-      } else {
-        return `${familyName}, ${givenName}`;
-      }
-    },
-    OrgUnit: (dso: DSpaceObject): string => {
-      return dso.firstMetadataValue('organization.legalName') || this.translateService.instant('dso.name.untitled');
-    },
     Default: (dso: DSpaceObject): string => {
-      // If object doesn't have crvs.identifier.houseFamilyKey metadata use name property
-      return dso.firstMetadataValue('crvs.identifier.houseFamilyKey') || dso.name || this.translateService.instant('dso.name.untitled');
+      // Prioritize Legal Case File Number, then DC Title, then internal name
+      return dso.firstMetadataValue('legal.case.fileNumber') || dso.firstMetadataValue('dc.title') || dso.name || this.translateService.instant('dso.name.untitled');
     },
   };
 
@@ -96,23 +71,11 @@ export class DSONameService {
    * @returns {string} html embedded hit highlight.
    */
   getHitHighlights(object: any, dso: DSpaceObject): string {
-    const types = dso.getRenderTypes();
-    const entityType = types
-      .filter((type) => typeof type === 'string')
-      .find((type: string) => (['Person', 'OrgUnit']).includes(type)) as string;
-    if (entityType === 'Person') {
-      const familyName = this.firstMetadataValue(object, dso, 'person.familyName');
-      const givenName = this.firstMetadataValue(object, dso, 'person.givenName');
-      if (isEmpty(familyName) && isEmpty(givenName)) {
-        return this.firstMetadataValue(object, dso, 'dc.title') || dso.name;
-      } else if (isEmpty(familyName) || isEmpty(givenName)) {
-        return familyName || givenName;
-      }
-      return `${familyName}, ${givenName}`;
-    } else if (entityType === 'OrgUnit') {
-      return this.firstMetadataValue(object, dso, 'organization.legalName') || this.translateService.instant('dso.name.untitled');
-    }
-    return this.firstMetadataValue(object, dso, 'crvs.identifier.houseFamilyKey') || dso.name || this.translateService.instant('dso.name.untitled');
+    // Prioritize Legal Case File Number hit highlight, then DC Title hit highlight, then internal name
+    return this.firstMetadataValue(object, dso, 'legal.case.fileNumber') ||
+      this.firstMetadataValue(object, dso, 'dc.title') ||
+      dso.name ||
+      this.translateService.instant('dso.name.untitled');
   }
 
   /**

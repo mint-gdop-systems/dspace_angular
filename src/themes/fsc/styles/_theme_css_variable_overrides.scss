@@ -1,0 +1,34 @@
+// DSpace works with CSS variables for its own components.
+// This file overrides Bootstrap (or other sass variables).
+
+// Override semantic colors here
+$primary: #060b2e;
+$secondary: #495057;
+$success: #94ba65;
+$info: #006666;
+$warning: #ec9433;
+$danger: #cf4444;
+$light: #f8f9fa;
+$dark: #060b2e;
+
+// Add new semantic colors here
+$theme-custom-semantic-colors: (
+);
+
+/*** OTHER BOOTSTRAP VARIABLES ***/
+$body-color: #212529;
+$link-color: #060b2e;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: underline;
+
+$navbar-dark-color: #fff;
+
+/*** CUSTOM DSPACE VARIABLES ***/
+$ds-header-bg: #060b2e;
+$ds-navbar-bg: #060b2e;
+$ds-navbar-link-color: #ffffff;
+$ds-navbar-link-color-hover: #e0f2f1;
+
+$ds-footer-bg: #060b2e;
+$ds-footer-color: #ffffff;

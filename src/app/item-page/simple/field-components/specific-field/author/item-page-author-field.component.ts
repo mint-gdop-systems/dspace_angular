@@ -42,9 +42,11 @@ export class ItemPageAuthorFieldComponent extends ItemPageFieldComponent {
    * In this component, we want to display values for metadata 'dc.contributor.author', 'dc.creator' and 'dc.contributor'
    */
   fields: string[] = [
-    `crvs.head.husband`,
-    `crvs.head.wife`,
-    'crvs.head.additional',
+    'dc.contributor.author',
+    'dc.creator',
+    'dc.publisher',
+    'legal.case.type',
+    'legal.case.level',
   ];
 
   /**

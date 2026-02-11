@@ -355,7 +355,7 @@
 
   "admin.access-control.epeople.form.table.name": "Name",
 
-  "admin.access-control.epeople.form.table.collectionOrCommunity": "Woreda/Sub City",
+  "admin.access-control.epeople.form.table.collectionOrCommunity": "Case Types/Courts",
 
   "admin.access-control.epeople.form.memberOfNoGroups": "This EPerson is not a member of any groups",
 
@@ -393,7 +393,7 @@
 
   "admin.access-control.groups.table.name": "Name",
 
-  "admin.access-control.groups.table.collectionOrCommunity": "Woreda/Sub City",
+  "admin.access-control.groups.table.collectionOrCommunity": "Case Types/Courts",
 
   "admin.access-control.groups.table.members": "Members",
 
@@ -421,7 +421,7 @@
 
   "admin.access-control.groups.form.groupName": "Group name",
 
-  "admin.access-control.groups.form.groupCommunity": "Sub City or Woreda",
+  "admin.access-control.groups.form.groupCommunity": "Courts or Case Types",
 
   "admin.access-control.groups.form.groupDescription": "Description",
 
@@ -509,7 +509,7 @@
 
   "admin.access-control.groups.form.subgroups-list.table.name": "Name",
 
-  "admin.access-control.groups.form.subgroups-list.table.collectionOrCommunity": "Woreda/Sub City",
+  "admin.access-control.groups.form.subgroups-list.table.collectionOrCommunity": "Case Types/Courts",
 
   "admin.access-control.groups.form.subgroups-list.table.edit": "Remove / Add",
 
@@ -545,27 +545,27 @@
 
   "admin.notifications.source.breadcrumbs": "Quality Assurance",
 
-  "admin.access-control.groups.form.tooltip.editGroupPage": "On this page, you can modify the properties and members of a group. In the top section, you can edit the group name and description, unless this is an admin group for a woreda or sub city, in which case the group name and description are auto-generated and cannot be edited. In the following sections, you can edit group membership. See [the wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) for more details.",
+  "admin.access-control.groups.form.tooltip.editGroupPage": "On this page, you can modify the properties and members of a group. In the top section, you can edit the group name and description, unless this is an admin group for a Case Types or Courts, in which case the group name and description are auto-generated and cannot be edited. In the following sections, you can edit group membership. See [the wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) for more details.",
 
   "admin.access-control.groups.form.tooltip.editGroup.addEpeople": "To add or remove an EPerson to/from this group, either click the 'Browse All' button or use the search bar below to search for users (use the dropdown to the left of the search bar to choose whether to search by metadata or by email). Then click the plus icon for each user you wish to add in the list below, or the trash can icon for each user you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages.",
 
   "admin.access-control.groups.form.tooltip.editGroup.addSubgroups": "To add or remove a Subgroup to/from this group, either click the 'Browse All' button or use the search bar below to search for groups. Then click the plus icon for each group you wish to add in the list below, or the trash can icon for each group you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages.",
 
-  "admin.reports.collections.title": "Woreda Filter Report",
+  "admin.reports.collections.title": "Case Types Filter Report",
 
-  "admin.reports.collections.breadcrumbs": "Woreda Filter Report",
+  "admin.reports.collections.breadcrumbs": "Case Types Filter Report",
 
-  "admin.reports.collections.head": "Woreda Filter Report",
+  "admin.reports.collections.head": "Case Types Filter Report",
 
-  "admin.reports.button.show-collections": "Show Woredas",
+  "admin.reports.button.show-collections": "Show Case Types",
 
-  "admin.reports.collections.collections-report": "Woreda Report",
+  "admin.reports.collections.collections-report": "Case Types Report",
 
   "admin.reports.collections.item-results": "Item Results",
 
-  "admin.reports.collections.community": "Sub City",
+  "admin.reports.collections.community": "Courts",
 
-  "admin.reports.collections.collection": "Woreda",
+  "admin.reports.collections.collection": "Case Types",
 
   "admin.reports.collections.nb_items": "Nb. Items",
 
@@ -577,7 +577,7 @@
 
   "admin.reports.items.run": "Run Item Query",
 
-  "admin.reports.items.section.collectionSelector": "Woreda Selector",
+  "admin.reports.items.section.collectionSelector": "Case Types Selector",
 
   "admin.reports.items.section.metadataFieldQueries": "Metadata Field Queries",
 
@@ -643,7 +643,7 @@
 
   "admin.reports.items.id": "UUID",
 
-  "admin.reports.items.collection": "Woreda",
+  "admin.reports.items.collection": "Case Types",
 
   "admin.reports.items.handle": "URI",
 
@@ -790,17 +790,17 @@
   "admin.workflow.item.supervision": "Supervision",
   "admin.dashboard.title": "Admin Statistics Dashboard",
   "admin.dashboard.refresh": "Refresh Data",
-  "admin.dashboard.communities": "Sub Cities",
-  "admin.dashboard.collections": "Woredas",
+  "admin.dashboard.communities": "Sub Courts",
+  "admin.dashboard.collections": "Case Types",
   "admin.dashboard.archived-items": "Archived Items",
   "admin.dashboard.total-files": "Total Files",
   "admin.dashboard.workflow-items": "Workflow Items",
   "admin.dashboard.workflow-tasks": "Workflow Tasks",
   "admin.dashboard.workspace-items": "Awaiting Submission",
-  "admin.dashboard.collection-name": "Woreda Name",
+  "admin.dashboard.collection-name": "Case Types Name",
   "admin.dashboard.user-dashboard": "User Dashboard",
   "admin.dashboard.admin-dashboard": "Admin Dashboard",
-  "admin.dashboard.statistics.collections": "Woreda Statistics",
+  "admin.dashboard.statistics.collections": "Case Types Statistics",
   "admin.dashboard.no-data": "No collection statistics available.",
   "admin.dashboard.task-id": "Task ID",
   "admin.dashboard.task-type": "Type",
@@ -809,8 +809,8 @@
   "admin.dashboard.no-tasks": "No workflow tasks pending approval.",
   "admin.dashboard.recent-submissions": "Recent Submissions",
   "admin.dashboard.no-recent": "No recent items found.",
-  "admin.dashboard.collection-stats": "Top Woredas by Size",
-  "admin.dashboard.no-collection-stats": "No woreda statistics available.",
+  "admin.dashboard.collection-stats": "Top Case Types by Size",
+  "admin.dashboard.no-collection-stats": "No Case Types statistics available.",
   "menu.section.admin-dashboard": "Admin Dashboard",
   "menu.section.analytics": "Analytics",
 
@@ -828,7 +828,7 @@
 
   "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
 
-  "admin.batch-import.page.help": "Select the woreda to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the items to import",
+  "admin.batch-import.page.help": "Select the Case Types to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the items to import",
 
   "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
 
@@ -844,7 +844,7 @@
 
   "admin.metadata-import.page.button.proceed": "Proceed",
 
-  "admin.metadata-import.page.button.select-collection": "Select Woreda",
+  "admin.metadata-import.page.button.select-collection": "Select Case Types",
 
   "admin.metadata-import.page.error.addFile": "Select file first!",
 
@@ -1164,17 +1164,17 @@
 
   "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
 
-  "collection.create.breadcrumbs": "Create woreda",
+  "collection.create.breadcrumbs": "Create Case Types",
 
-  "collection.browse.logo": "Browse for a woreda logo",
+  "collection.browse.logo": "Browse for a Case Types logo",
 
-  "collection.create.head": "Create a Woreda",
+  "collection.create.head": "Create a Case Types",
 
-  "collection.create.notifications.success": "Successfully created the woreda",
+  "collection.create.notifications.success": "Successfully created the Case Types",
 
-  "collection.create.sub-head": "Create a Woreda for Sub City {{ parent }}",
+  "collection.create.sub-head": "Create a Case Types for Courts {{ parent }}",
 
-  "collection.curate.header": "Curate Woreda: {{collection}}",
+  "collection.curate.header": "Curate Case Types: {{collection}}",
 
   "collection.delete.cancel": "Cancel",
 
@@ -1182,33 +1182,33 @@
 
   "collection.delete.processing": "Deleting",
 
-  "collection.delete.head": "Delete Woreda",
+  "collection.delete.head": "Delete Case Types",
 
-  "collection.delete.notification.fail": "Woreda could not be deleted",
+  "collection.delete.notification.fail": "Case Types could not be deleted",
 
-  "collection.delete.notification.success": "Successfully deleted woreda",
+  "collection.delete.notification.success": "Successfully deleted Case Types",
 
-  "collection.delete.text": "Are you sure you want to delete woreda \"{{ dso }}\"",
+  "collection.delete.text": "Are you sure you want to delete Case Types \"{{ dso }}\"",
 
-  "collection.edit.delete": "Delete this woreda",
+  "collection.edit.delete": "Delete this Case Types",
 
-  "collection.edit.head": "Edit Woreda",
+  "collection.edit.head": "Edit Case Types",
 
-  "collection.edit.breadcrumbs": "Edit Woreda",
+  "collection.edit.breadcrumbs": "Edit Case Types",
 
   "collection.edit.tabs.mapper.head": "Item Mapper",
 
-  "collection.edit.tabs.item-mapper.title": "Woreda Edit - Item Mapper",
+  "collection.edit.tabs.item-mapper.title": "Case Types Edit - Item Mapper",
 
   "collection.edit.item-mapper.cancel": "Cancel",
 
-  "collection.edit.item-mapper.collection": "Woreda: \"<b>{{name}}</b>\"",
+  "collection.edit.item-mapper.collection": "Case Types: \"<b>{{name}}</b>\"",
 
   "collection.edit.item-mapper.confirm": "Map selected items",
 
-  "collection.edit.item-mapper.description": "This is the item mapper tool that allows woreda administrators to map items from other woredas into this woreda. You can search for items from other woredas and map them, or browse the list of currently mapped items.",
+  "collection.edit.item-mapper.description": "This is the item mapper tool that allows Case Types administrators to map items from other Case Types into this Case Types. You can search for items from other Case Types and map them, or browse the list of currently mapped items.",
 
-  "collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Woredas",
+  "collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Case Types",
 
   "collection.edit.item-mapper.no-search": "Please enter a query to search",
 
@@ -1240,35 +1240,35 @@
 
   "collection.edit.logo.delete-undo.title": "Undo delete",
 
-  "collection.edit.logo.label": "Woreda logo",
+  "collection.edit.logo.label": "Case Types logo",
 
-  "collection.edit.logo.notifications.add.error": "Uploading woreda logo failed. Please verify the content before retrying.",
+  "collection.edit.logo.notifications.add.error": "Uploading Case Types logo failed. Please verify the content before retrying.",
 
-  "collection.edit.logo.notifications.add.success": "Uploading woreda logo successful.",
+  "collection.edit.logo.notifications.add.success": "Uploading Case Types logo successful.",
 
   "collection.edit.logo.notifications.delete.success.title": "Logo deleted",
 
-  "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the woreda's logo",
+  "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the Case Types's logo",
 
   "collection.edit.logo.notifications.delete.error.title": "Error deleting logo",
 
-  "collection.edit.logo.upload": "Drop a woreda logo to upload",
+  "collection.edit.logo.upload": "Drop a Case Types logo to upload",
 
-  "collection.edit.notifications.success": "Successfully edited the woreda",
+  "collection.edit.notifications.success": "Successfully edited the Case Types",
 
   "collection.edit.return": "Back",
 
   "collection.edit.tabs.access-control.head": "Access Control",
 
-  "collection.edit.tabs.access-control.title": "Woreda Edit - Access Control",
+  "collection.edit.tabs.access-control.title": "Case Types Edit - Access Control",
 
   "collection.edit.tabs.curate.head": "Curate",
 
-  "collection.edit.tabs.curate.title": "Woreda Edit - Curate",
+  "collection.edit.tabs.curate.title": "Case Types Edit - Curate",
 
   "collection.edit.tabs.authorizations.head": "Authorizations",
 
-  "collection.edit.tabs.authorizations.title": "Woreda Edit - Authorizations",
+  "collection.edit.tabs.authorizations.title": "Case Types Edit - Authorizations",
 
   "collection.edit.item.authorizations.load-bundle-button": "Load more bundles",
 
@@ -1278,15 +1278,15 @@
 
   "collection.edit.tabs.metadata.head": "Edit Metadata",
 
-  "collection.edit.tabs.metadata.title": "Woreda Edit - Metadata",
+  "collection.edit.tabs.metadata.title": "Case Types Edit - Metadata",
 
   "collection.edit.tabs.roles.head": "Assign Roles",
 
-  "collection.edit.tabs.roles.title": "Woreda Edit - Roles",
+  "collection.edit.tabs.roles.title": "Case Types Edit - Roles",
 
-  "collection.edit.tabs.source.external": "This woreda harvests its content from an external source",
+  "collection.edit.tabs.source.external": "This Case Types harvests its content from an external source",
 
-  "collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target woreda.",
+  "collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target Case Types.",
 
   "collection.edit.tabs.source.form.harvestType": "Content being harvested",
 
@@ -1314,11 +1314,11 @@
 
   "collection.edit.tabs.source.notifications.invalid.title": "Metadata invalid",
 
-  "collection.edit.tabs.source.notifications.saved.content": "Your changes to this woreda's content source were saved.",
+  "collection.edit.tabs.source.notifications.saved.content": "Your changes to this Case Types's content source were saved.",
 
   "collection.edit.tabs.source.notifications.saved.title": "Content Source saved",
 
-  "collection.edit.tabs.source.title": "Woreda Edit - Content Source",
+  "collection.edit.tabs.source.title": "Case Types Edit - Content Source",
 
   "collection.edit.template.add-button": "Add",
 
@@ -1332,7 +1332,7 @@
 
   "collection.edit.template.error": "An error occurred retrieving the template item",
 
-  "collection.edit.template.head": "Edit Template Item for Woreda \"{{ collection }}\"",
+  "collection.edit.template.head": "Edit Template Item for Case Types \"{{ collection }}\"",
 
   "collection.edit.template.label": "Template item",
 
@@ -1348,7 +1348,7 @@
 
   "collection.form.description": "Introductory text (HTML)",
 
-  "collection.form.errors.title.required": "Please enter a woreda name",
+  "collection.form.errors.title.required": "Please enter a Case Types name",
 
   "collection.form.license": "License",
 
@@ -1362,15 +1362,15 @@
 
   "collection.form.entityType": "Entity Type",
 
-  "collection.listelement.badge": "Woreda",
+  "collection.listelement.badge": "Case Types",
 
-  "collection.logo": "Woreda logo",
+  "collection.logo": "Case Types logo",
 
   "collection.page.browse.search.head": "Search",
 
-  "collection.page.edit": "Edit this Woreda",
+  "collection.page.edit": "Edit this Case Types",
 
-  "collection.page.handle": "Permanent URI for this colleWoredaction",
+  "collection.page.handle": "Permanent URI for this colleCasesction",
 
   "collection.page.license": "License",
 
@@ -1384,13 +1384,13 @@
 
   "collection.select.confirm": "Confirm selected",
 
-  "collection.select.empty": "No Woredas to show",
+  "collection.select.empty": "No Case Types to show",
 
-  "collection.select.table.selected": "Selected Woredas",
+  "collection.select.table.selected": "Selected Case Types",
 
-  "collection.select.table.select": "Select Woreda",
+  "collection.select.table.select": "Select Case Types",
 
-  "collection.select.table.deselect": "Deselect Woreda",
+  "collection.select.table.deselect": "Deselect Case Types",
 
   "collection.select.table.title": "Title",
 
@@ -1444,11 +1444,11 @@
 
   "collection.source.update.notifications.error.title": "Server Error",
 
-  "communityList.breadcrumbs": "Sub City List",
+  "communityList.breadcrumbs": "Courts List",
 
-  "communityList.tabTitle": "Sub City List",
+  "communityList.tabTitle": "Courts List",
 
-  "communityList.title": "List of Sub Cities",
+  "communityList.title": "List of Sub Courts",
 
   "communityList.showMore": "Show More",
 
@@ -1456,19 +1456,19 @@
 
   "communityList.collapse": "Collapse {{ name }}",
 
-  "community.browse.logo": "Browse for a Sub City logo",
+  "community.browse.logo": "Browse for a Courts logo",
 
-  "community.subcoms-cols.breadcrumbs": "Sub Cities and Woredas",
+  "community.subcoms-cols.breadcrumbs": "Sub Courts and Case Types",
 
-  "community.create.breadcrumbs": "Create Sub City",
+  "community.create.breadcrumbs": "Create Courts",
 
-  "community.create.head": "Create a Sub City",
+  "community.create.head": "Create a Courts",
 
-  "community.create.notifications.success": "Successfully created the sub city",
+  "community.create.notifications.success": "Successfully created the Courts",
 
-  "community.create.sub-head": "Create a Sub-Sub City for Sub City {{ parent }}",
+  "community.create.sub-head": "Create a Sub-Courts for Courts {{ parent }}",
 
-  "community.curate.header": "Curate Sub City: {{community}}",
+  "community.curate.header": "Curate Courts: {{community}}",
 
   "community.delete.cancel": "Cancel",
 
@@ -1476,19 +1476,19 @@
 
   "community.delete.processing": "Deleting...",
 
-  "community.delete.head": "Delete Sub City",
+  "community.delete.head": "Delete Courts",
 
-  "community.delete.notification.fail": "Sub City could not be deleted",
+  "community.delete.notification.fail": "Courts could not be deleted",
 
-  "community.delete.notification.success": "Successfully deleted sub city",
+  "community.delete.notification.success": "Successfully deleted Courts",
 
-  "community.delete.text": "Are you sure you want to delete sub city \"{{ dso }}\"",
+  "community.delete.text": "Are you sure you want to delete Courts \"{{ dso }}\"",
 
-  "community.edit.delete": "Delete this sub city",
+  "community.edit.delete": "Delete this Courts",
 
-  "community.edit.head": "Edit Sub City",
+  "community.edit.head": "Edit Courts",
 
-  "community.edit.breadcrumbs": "Edit Sub City",
+  "community.edit.breadcrumbs": "Edit Courts",
 
   "community.edit.logo.delete.title": "Delete logo",
 
@@ -1498,51 +1498,51 @@
 
   "community-collection.edit.logo.delete-undo.title": "Undo delete",
 
-  "community.edit.logo.label": "Sub City logo",
+  "community.edit.logo.label": "Courts logo",
 
-  "community.edit.logo.notifications.add.error": "Uploading sub city logo failed. Please verify the content before retrying.",
+  "community.edit.logo.notifications.add.error": "Uploading Courts logo failed. Please verify the content before retrying.",
 
-  "community.edit.logo.notifications.add.success": "Upload Sub City logo successful.",
+  "community.edit.logo.notifications.add.success": "Upload Courts logo successful.",
 
   "community.edit.logo.notifications.delete.success.title": "Logo deleted",
 
-  "community.edit.logo.notifications.delete.success.content": "Successfully deleted the Sub City's logo",
+  "community.edit.logo.notifications.delete.success.content": "Successfully deleted the Courts's logo",
 
   "community.edit.logo.notifications.delete.error.title": "Error deleting logo",
 
-  "community.edit.logo.upload": "Drop a Sub City logo to upload",
+  "community.edit.logo.upload": "Drop a Courts logo to upload",
 
-  "community.edit.notifications.success": "Successfully edited the Sub City",
+  "community.edit.notifications.success": "Successfully edited the Courts",
 
   "community.edit.notifications.unauthorized": "You do not have privileges to make this change",
 
-  "community.edit.notifications.error": "An error occurred while editing the Sub City",
+  "community.edit.notifications.error": "An error occurred while editing the Courts",
 
   "community.edit.return": "Back",
 
   "community.edit.tabs.curate.head": "Curate",
 
-  "community.edit.tabs.curate.title": "Sub City Edit - Curate",
+  "community.edit.tabs.curate.title": "Courts Edit - Curate",
 
   "community.edit.tabs.access-control.head": "Access Control",
 
-  "community.edit.tabs.access-control.title": "Sub City Edit - Access Control",
+  "community.edit.tabs.access-control.title": "Courts Edit - Access Control",
 
   "community.edit.tabs.metadata.head": "Edit Metadata",
 
-  "community.edit.tabs.metadata.title": "Sub City Edit - Metadata",
+  "community.edit.tabs.metadata.title": "Courts Edit - Metadata",
 
   "community.edit.tabs.roles.head": "Assign Roles",
 
-  "community.edit.tabs.roles.title": "Sub City Edit - Roles",
+  "community.edit.tabs.roles.title": "Courts Edit - Roles",
 
   "community.edit.tabs.authorizations.head": "Authorizations",
 
-  "community.edit.tabs.authorizations.title": "Sub City Edit - Authorizations",
+  "community.edit.tabs.authorizations.title": "Courts Edit - Authorizations",
 
-  "community.listelement.badge": "Sub City",
+  "community.listelement.badge": "Courts",
 
-  "community.logo": "Sub City logo",
+  "community.logo": "Courts logo",
 
   "comcol-role.edit.no-group": "None",
 
@@ -1568,23 +1568,23 @@
 
   "comcol-role.edit.collection-admin.name": "Administrators",
 
-  "comcol-role.edit.community-admin.description": "Sub City administrators can create sub-Sub Cities or Woredas, and manage or assign management for those sub-Sub Cities or Woredas. In addition, they decide who can submit items to any sub-Woredas, edit item metadata (after submission), and add (map) existing items from other Woredas (subject to authorization).",
+  "comcol-role.edit.community-admin.description": "Courts administrators can create sub-Sub Courts or Case Types, and manage or assign management for those sub-Sub Courts or Case Types. In addition, they decide who can submit items to any sub-Case Types, edit item metadata (after submission), and add (map) existing items from other Case Types (subject to authorization).",
 
-  "comcol-role.edit.collection-admin.description": "Woreda administrators decide who can submit items to the colleWoredaction, edit item metadata (after submission), and add (map) existing items from other Woreda to this Woreda (subject to authorization for that Woreda).",
+  "comcol-role.edit.collection-admin.description": "Case Types administrators decide who can submit items to the colleCasesction, edit item metadata (after submission), and add (map) existing items from other Case Types to this Case Types (subject to authorization for that Case Types).",
 
   "comcol-role.edit.submitters.name": "Submitters",
 
-  "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this Woreda.",
+  "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this Case Types.",
 
   "comcol-role.edit.item_read.name": "Default item read access",
 
-  "comcol-role.edit.item_read.description": "E-People and Groups that can read new items submitted to this Woreda. Changes to this role are not retroactive. Existing items in the system will still be viewable by those who had read access at the time of their addition.",
+  "comcol-role.edit.item_read.description": "E-People and Groups that can read new items submitted to this Case Types. Changes to this role are not retroactive. Existing items in the system will still be viewable by those who had read access at the time of their addition.",
 
   "comcol-role.edit.item_read.anonymous-group": "Default read for incoming items is currently set to Anonymous.",
 
   "comcol-role.edit.bitstream_read.name": "Default bitstream read access",
 
-  "comcol-role.edit.bitstream_read.description": "E-People and Groups that can read new bitstreams submitted to this Woreda. Changes to this role are not retroactive. Existing bitstreams in the system will still be viewable by those who had read access at the time of their addition.",
+  "comcol-role.edit.bitstream_read.description": "E-People and Groups that can read new bitstreams submitted to this Case Types. Changes to this role are not retroactive. Existing bitstreams in the system will still be viewable by those who had read access at the time of their addition.",
 
   "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
 
@@ -1608,7 +1608,7 @@
 
   "community.form.description": "Introductory text (HTML)",
 
-  "community.form.errors.title.required": "Please enter a Sub City name",
+  "community.form.errors.title.required": "Please enter a Courts name",
 
   "community.form.rights": "Copyright text (HTML)",
 
@@ -1616,9 +1616,9 @@
 
   "community.form.title": "Name",
 
-  "community.page.edit": "Edit this Sub City",
+  "community.page.edit": "Edit this Courts",
 
-  "community.page.handle": "Permanent URI for this sub city",
+  "community.page.handle": "Permanent URI for this Courts",
 
   "community.page.license": "License",
 
@@ -1626,15 +1626,15 @@
 
   "community.page.options": "Options",
 
-  "community.all-lists.head": "Sub Cities and Woredas",
+  "community.all-lists.head": "Sub Courts and Case Types",
 
   "community.search.breadcrumbs": "Search",
 
   "community.search.results.head": "Search Results",
 
-  "community.sub-collection-list.head": "Woredas in this sub city",
+  "community.sub-collection-list.head": "Case Types in this Courts",
 
-  "community.sub-community-list.head": "Sub Cities in this sub city",
+  "community.sub-community-list.head": "Sub Courts in this Courts",
 
   "cookies.consent.accept-all": "Accept all",
 
@@ -1772,17 +1772,17 @@
 
   "dso.name.unnamed": "Unnamed",
 
-  "dso-selector.create.collection.head": "New Woreda",
+  "dso-selector.create.collection.head": "New Case Types",
 
-  "dso-selector.create.collection.sub-level": "Create a new Woreda in",
+  "dso-selector.create.collection.sub-level": "Create a new Case Types in",
 
-  "dso-selector.create.community.head": "New sub city",
+  "dso-selector.create.community.head": "New Courts",
 
   "dso-selector.create.community.or-divider": "or",
 
-  "dso-selector.create.community.sub-level": "Create a new sub city in",
+  "dso-selector.create.community.sub-level": "Create a new Courts in",
 
-  "dso-selector.create.community.top-level": "Create a new top-level sub city",
+  "dso-selector.create.community.top-level": "Create a new top-level Courts",
 
   "dso-selector.create.item.head": "New item",
 
@@ -1790,9 +1790,9 @@
 
   "dso-selector.create.submission.head": "New submission",
 
-  "dso-selector.edit.collection.head": "Edit Woreda",
+  "dso-selector.edit.collection.head": "Edit Case Types",
 
-  "dso-selector.edit.community.head": "Edit sub city",
+  "dso-selector.edit.community.head": "Edit Courts",
 
   "dso-selector.edit.item.head": "Edit item",
 
@@ -1808,13 +1808,13 @@
 
   "dso-selector.placeholder": "Search for a {{ type }}",
 
-  "dso-selector.placeholder.type.community": "sub city",
+  "dso-selector.placeholder.type.community": "Courts",
 
-  "dso-selector.placeholder.type.collection": "Woreda",
+  "dso-selector.placeholder.type.collection": "Case Types",
 
   "dso-selector.placeholder.type.item": "item",
 
-  "dso-selector.select.collection.head": "Select a Woreda",
+  "dso-selector.select.collection.head": "Select a Case Types",
 
   "dso-selector.set-scope.community.head": "Select a search scope",
 
@@ -1822,7 +1822,7 @@
 
   "dso-selector.set-scope.community.or-divider": "or",
 
-  "dso-selector.set-scope.community.input-header": "Search for a sub city or Woreda",
+  "dso-selector.set-scope.community.input-header": "Search for a Courts or Case Types",
 
   "dso-selector.claim.item.head": "Profile tips",
 
@@ -1916,11 +1916,11 @@
 
   "error.browse-by": "Error fetching items",
 
-  "error.collection": "Error fetching Woreda",
+  "error.collection": "Error fetching Case Types",
 
-  "error.collections": "Error fetching Woredas",
+  "error.collections": "Error fetching Case Types",
 
-  "error.community": "Error fetching sub city",
+  "error.community": "Error fetching Courts",
 
   "error.identifier": "No item found for the identifier",
 
@@ -1940,13 +1940,13 @@
 
   "error.invalid-search-query": "Search query is not valid. Please check <a href=\"https://solr.apache.org/guide/query-syntax-and-parsing.html\" target=\"_blank\">Solr query syntax</a> best practices for further information about this error.",
 
-  "error.sub-collections": "Error fetching sub-Woreda",
+  "error.sub-collections": "Error fetching Sub Case Types",
 
-  "error.sub-communities": "Error fetching sub-Sub Cities",
+  "error.sub-communities": "Error fetching Sub Courts",
 
   "error.submission.sections.init-form-error": "An error occurred during section initialize, please check your input-form configuration. Details are below : <br> <br>",
 
-  "error.top-level-communities": "Error fetching top-level Sub Cities",
+  "error.top-level-communities": "Error fetching top-level Sub Courts",
 
   "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
@@ -1986,7 +1986,7 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
-  "footer.copyright": "Civil Registration and Residency Service Agency © 2002-{{ year }}",
+  "footer.copyright": "Federal Supreme Court of Ethiopia Agency © 2002-{{ year }}",
 
   "footer.link.accessibility": "Accessibility settings",
 
@@ -2236,7 +2236,7 @@
 
   "home.top-level-communities.head": "Recent Items",
 
-  "home.top-level-communities.help": "Select a sub city to browse its Woredas.",
+  "home.top-level-communities.help": "Select a Courts to browse its Case Types.",
 
   "info.accessibility-settings.breadcrumbs": "Accessibility settings",
 
@@ -2466,9 +2466,9 @@
 
   "item.edit.tabs.disabled.tooltip": "You're not authorized to access this tab",
 
-  "item.edit.tabs.mapper.head": "Woreda Mapper",
+  "item.edit.tabs.mapper.head": "Case Types Mapper",
 
-  "item.edit.tabs.item-mapper.title": "Item Edit - Woreda Mapper",
+  "item.edit.tabs.item-mapper.title": "Item Edit - Case Types Mapper",
 
   "item.edit.identifiers.doi.status.UNKNOWN": "Unknown",
 
@@ -2512,41 +2512,41 @@
 
   "item.edit.register-doi.to-update": "The following DOI has already been minted and will be queued for registration online",
 
-  "item.edit.item-mapper.buttons.add": "Map item to selected Woredas",
+  "item.edit.item-mapper.buttons.add": "Map item to selected Case Types",
 
-  "item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected Woredas",
+  "item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected Case Types",
 
   "item.edit.item-mapper.cancel": "Cancel",
 
-  "item.edit.item-mapper.description": "This is the item mapper tool that allows administrators to map this item to other Woredas. You can search for Woredas and map them, or browse the list of Woredas the item is currently mapped to.",
+  "item.edit.item-mapper.description": "This is the item mapper tool that allows administrators to map this item to other Case Types. You can search for Case Types and map them, or browse the list of Case Types the item is currently mapped to.",
 
-  "item.edit.item-mapper.head": "Item Mapper - Map Item to Woredas",
+  "item.edit.item-mapper.head": "Item Mapper - Map Item to Case Types",
 
   "item.edit.item-mapper.item": "Item: \"<b>{{name}}</b>\"",
 
   "item.edit.item-mapper.no-search": "Please enter a query to search",
 
-  "item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} Woredas.",
+  "item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} Case Types.",
 
   "item.edit.item-mapper.notifications.add.error.head": "Mapping errors",
 
-  "item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} Woredas.",
+  "item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} Case Types.",
 
   "item.edit.item-mapper.notifications.add.success.head": "Mapping completed",
 
-  "item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} Woredas.",
+  "item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} Case Types.",
 
   "item.edit.item-mapper.notifications.remove.error.head": "Removal of mapping errors",
 
-  "item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} Woredas.",
+  "item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} Case Types.",
 
   "item.edit.item-mapper.notifications.remove.success.head": "Removal of mapping completed",
 
-  "item.edit.item-mapper.search-form.placeholder": "Search Woredas...",
+  "item.edit.item-mapper.search-form.placeholder": "Search Case Types...",
 
-  "item.edit.item-mapper.tabs.browse": "Browse mapped Woredas",
+  "item.edit.item-mapper.tabs.browse": "Browse mapped Case Types",
 
-  "item.edit.item-mapper.tabs.map": "Map new Woredas",
+  "item.edit.item-mapper.tabs.map": "Map new Case Types",
 
   "item.edit.metadata.add-button": "Add",
 
@@ -2634,7 +2634,7 @@
 
   "item.edit.move.discard-button": "Discard",
 
-  "item.edit.move.description": "Select the Woreda you wish to move this item to. To narrow down the list of displayed Woredas, you can enter a search query in the box.",
+  "item.edit.move.description": "Select the Case Types you wish to move this item to. To narrow down the list of displayed Case Types, you can enter a search query in the box.",
 
   "item.edit.move.error": "An error occurred when attempting to move the item",
 
@@ -2642,15 +2642,15 @@
 
   "item.edit.move.inheritpolicies.checkbox": "Inherit policies",
 
-  "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination Woreda",
+  "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination Case Types",
 
-  "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the Woreda. This cannot be undone.",
+  "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the Case Types. This cannot be undone.",
 
   "item.edit.move.move": "Move",
 
   "item.edit.move.processing": "Moving...",
 
-  "item.edit.move.search.placeholder": "Enter a search query to look for Woredas",
+  "item.edit.move.search.placeholder": "Enter a search query to look for Case Types",
 
   "item.edit.move.success": "The item has been moved successfully",
 
@@ -2754,13 +2754,13 @@
 
   "item.edit.tabs.status.buttons.delete.label": "Completely expunge item",
 
-  "item.edit.tabs.status.buttons.mappedCollections.button": "Mapped Woredas",
+  "item.edit.tabs.status.buttons.mappedCollections.button": "Mapped Case Types",
 
-  "item.edit.tabs.status.buttons.mappedCollections.label": "Manage mapped Woredas",
+  "item.edit.tabs.status.buttons.mappedCollections.label": "Manage mapped Case Types",
 
-  "item.edit.tabs.status.buttons.move.button": "Move this item to a different Woreda",
+  "item.edit.tabs.status.buttons.move.button": "Move this item to a different Case Types",
 
-  "item.edit.tabs.status.buttons.move.label": "Move item to another Woreda",
+  "item.edit.tabs.status.buttons.move.label": "Move item to another Case Types",
 
   "item.edit.tabs.status.buttons.private.button": "Make it non-discoverable...",
 
@@ -2916,11 +2916,11 @@
 
   "item.page.author": "Author",
 
-  "item.page.authors": "Family Heads",
+  "item.page.authors": "Parties on Case",
 
   "item.page.citation": "Citation",
 
-  "item.page.collections": "Woredas",
+  "item.page.collections": "Case Types",
 
   "item.page.collections.loading": "Loading...",
 
@@ -3110,7 +3110,7 @@
 
   "item.select.table.author": "Author",
 
-  "item.select.table.collection": "Woreda",
+  "item.select.table.collection": "Case Types",
 
   "item.select.table.title": "Title",
 
@@ -3388,13 +3388,13 @@
 
   "loading.browse-by-page": "Loading page...",
 
-  "loading.collection": "Loading Woreda...",
+  "loading.collection": "Loading Case Types...",
 
-  "loading.collections": "Loading Woredas...",
+  "loading.collections": "Loading Case Types...",
 
   "loading.content-source": "Loading content source...",
 
-  "loading.community": "Loading sub city...",
+  "loading.community": "Loading Courts...",
 
   "loading.default": "Loading...",
 
@@ -3410,11 +3410,11 @@
 
   "loading.search-results": "Loading search results...",
 
-  "loading.sub-collections": "Loading sub-Woredas...",
+  "loading.sub-collections": "Loading Sub Case Types...",
 
-  "loading.sub-communities": "Loading sub-Sub Cities...",
+  "loading.sub-communities": "Loading Sub Courts...",
 
-  "loading.top-level-communities": "Loading top-level Sub Cities...",
+  "loading.top-level-communities": "Loading top-level Courts...",
 
   "login.form.email": "Email address",
 
@@ -3466,13 +3466,13 @@
 
   "menu.section.reports": "Reports",
 
-  "menu.section.reports.collections": "Filtered Woredas",
+  "menu.section.reports.collections": "Filtered Case Types",
 
   "menu.section.reports.queries": "Metadata Query",
 
   "menu.section.admin_search": "Admin Search",
 
-  "menu.section.browse_community": "This sub city",
+  "menu.section.browse_community": "This Courts",
 
   "menu.section.browse_community_by_author": "By Author",
 
@@ -3480,7 +3480,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_global": "All of DSpace",
+  "menu.section.browse_global": "All Cases",
 
   "menu.section.browse_global_by_author": "By Author",
 
@@ -3494,7 +3494,7 @@
 
   "menu.section.browse_global_by_title": "By Title",
 
-  "menu.section.browse_global_communities_and_collections": "Sub Cities & Woredas",
+  "menu.section.browse_global_communities_and_collections": "Courts and Case Types",
 
   "menu.section.browse_global_geospatial_map": "By Geolocation (Map)",
 
@@ -3504,17 +3504,17 @@
 
   "menu.section.edit": "Edit",
 
-  "menu.section.edit_collection": "Woreda",
+  "menu.section.edit_collection": "Case Types",
 
-  "menu.section.edit_community": "Sub City",
+  "menu.section.edit_community": "Courts",
 
   "menu.section.edit_item": "Item",
 
   "menu.section.export": "Export",
 
-  "menu.section.export_collection": "Woreda",
+  "menu.section.export_collection": "Case Types",
 
-  "menu.section.export_community": "Sub City",
+  "menu.section.export_community": "Courts",
 
   "menu.section.export_item": "Item",
 
@@ -3558,9 +3558,9 @@
 
   "menu.section.new": "New",
 
-  "menu.section.new_collection": "Woreda",
+  "menu.section.new_collection": "Case Types",
 
-  "menu.section.new_community": "Sub City",
+  "menu.section.new_community": "Courts",
 
   "menu.section.new_item": "Item",
 
@@ -3596,7 +3596,7 @@
   "admin.dashboard.statistics.bitstreams": "Total Archived Bitstreams",
   "admin.dashboard.statistics.rejected-workflow": "Rejected Workflow Items",
   "admin.dashboard.statistics.awaiting-approval": "Tasks Awaiting Approval",
-  "admin.dashboard.statistics.by-collection": "Items by Woreda",
+  "admin.dashboard.statistics.by-collection": "Items by Case Types",
   "admin.dashboard.workflow.task.id": "ID",
   "admin.dashboard.workflow.task.item": "Item",
   "admin.dashboard.workflow.task.action": "Action",
@@ -3676,7 +3676,7 @@
 
   "mydspace.results.no-authors": "No Authors",
 
-  "mydspace.results.no-collections": "No Woredas",
+  "mydspace.results.no-collections": "No Case Types",
 
   "mydspace.results.no-date": "No Date",
 
@@ -3730,7 +3730,7 @@
 
   "nav.browse.header": "All of DSpace",
 
-  "nav.community-browse.header": "By Sub City",
+  "nav.community-browse.header": "By Courts",
 
   "nav.context-help-toggle": "Toggle context help",
 
@@ -4368,7 +4368,7 @@
 
   "register-page.registration.header": "New user registration",
 
-  "register-page.registration.info": "Register an account to subscribe to Woredas for email updates, and submit new items to DSpace.",
+  "register-page.registration.info": "Register an account to subscribe to Case Types for email updates, and submit new items to DSpace.",
 
   "register-page.registration.email": "Email Address *",
 
@@ -4466,9 +4466,9 @@
 
   "repository.image.logo": "Repository logo",
 
-  "repository.title": "DSpace Repository",
+  "repository.title": "Federal Supreme Court of Ethiopia Repository",
 
-  "repository.title.prefix": "DSpace Repository :: ",
+  "repository.title.prefix": "FSCRepository :: ",
 
   "resource-policies.add.button": "Add",
 
@@ -4480,9 +4480,9 @@
 
   "resource-policies.add.for.item": "Add a new Item policy",
 
-  "resource-policies.add.for.community": "Add a new Sub City policy",
+  "resource-policies.add.for.community": "Add a new Courts policy",
 
-  "resource-policies.add.for.collection": "Add a new Woreda policy",
+  "resource-policies.add.for.collection": "Add a new Case Types policy",
 
   "resource-policies.create.page.heading": "Create new resource policy for ",
 
@@ -4590,9 +4590,9 @@
 
   "resource-policies.table.headers.title.for.item": "Policies for Item",
 
-  "resource-policies.table.headers.title.for.community": "Policies for Sub City",
+  "resource-policies.table.headers.title.for.community": "Policies for Courts",
 
-  "resource-policies.table.headers.title.for.collection": "Policies for Woreda",
+  "resource-policies.table.headers.title.for.collection": "Policies for Case Types",
 
   "root.skip-to-content": "Skip to main content",
 
@@ -5019,7 +5019,7 @@
 
   "statistics.table.title.TopCountries": "Top country views",
 
-  "statistics.table.title.TopCities": "Top city views",
+  "statistics.table.title.TopCourts": "Top city views",
 
   "statistics.table.header.views": "Views",
 
@@ -5225,7 +5225,7 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.cancel": "Cancel",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.collection": "Select a Woreda to import new entries to",
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.collection": "Select a Case Types to import new entries to",
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.entities": "Entities",
 
@@ -5537,7 +5537,7 @@
 
   "submission.sections.general.cannot_deposit": "Deposit cannot be completed due to errors in the form.<br>Please fill out all required fields to complete the deposit.",
 
-  "submission.sections.general.collection": "Woreda",
+  "submission.sections.general.collection": "Case Types",
 
   "submission.sections.general.deposit_error_notice": "There was an issue when submitting the item, please try again later.",
 
@@ -5551,7 +5551,7 @@
 
   "submission.sections.general.metadata-extracted-new-section": "New <strong>{{sectionId}}</strong> section has been added to submission.",
 
-  "submission.sections.general.no-collection": "No Woreda found",
+  "submission.sections.general.no-collection": "No Case Types found",
 
   "submission.sections.general.no-entity": "No entity types found",
 
@@ -5561,7 +5561,7 @@
 
   "submission.sections.general.save_success_notice": "Submission saved successfully.",
 
-  "submission.sections.general.search-collection": "Search for a Woreda",
+  "submission.sections.general.search-collection": "Search for a Case Types",
 
   "submission.sections.general.sections_not_valid": "There are incomplete sections.",
 
@@ -5678,9 +5678,9 @@
 
   "submission.sections.upload.form.until-placeholder": "Until",
 
-  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} Woreda will be accessible according to the following group(s):",
+  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} Case Types will be accessible according to the following group(s):",
 
-  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} Woreda will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
+  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} Case Types will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
 
   "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files by dragging & dropping them anywhere on the page.</strong>",
 
@@ -5818,7 +5818,7 @@
 
   "submission.workflow.tasks.claimed.approve": "Approve",
 
-  "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the Woreda, select \"Approve\".",
+  "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the Case Types, select \"Approve\".",
 
   "submission.workflow.tasks.claimed.edit": "Edit",
 
@@ -5838,7 +5838,7 @@
 
   "submission.workflow.tasks.claimed.reject.submit": "Reject",
 
-  "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the Woreda, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
+  "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the Case Types, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
 
   "submission.workflow.tasks.claimed.return": "Return to pool",
 
@@ -5872,9 +5872,9 @@
 
   "subscriptions.item": "Subscriptions for items",
 
-  "subscriptions.collection": "Subscriptions for Woredas",
+  "subscriptions.collection": "Subscriptions for Case Types",
 
-  "subscriptions.community": "Subscriptions for Sub Cities",
+  "subscriptions.community": "Subscriptions for Sub Courts",
 
   "subscriptions.subscription_type": "Subscription type",
 
@@ -5938,7 +5938,7 @@
 
   "subscriptions.table.not-available-message": "The subscribed item has been deleted, or you don't currently have the permission to view it",
 
-  "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Sub City or Woreda, use the subscription button on the object's page.",
+  "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Courts or Case Types, use the subscription button on the object's page.",
 
   "thumbnail.default.alt": "Thumbnail Image",
 
@@ -6408,9 +6408,9 @@
 
   "item-access-control-title": "This form allows you to perform changes to the access conditions of the item's metadata or its bitstreams.",
 
-  "collection-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by this Woreda. Changes may be performed to either all Item metadata or all content (bitstreams).",
+  "collection-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by this Case Types. Changes may be performed to either all Item metadata or all content (bitstreams).",
 
-  "community-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by any Woreda under this Sub City. Changes may be performed to either all Item metadata or all content (bitstreams).",
+  "community-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by any Case Types under this Courts. Changes may be performed to either all Item metadata or all content (bitstreams).",
 
   "access-control-item-header-toggle": "Item's Metadata",
 
@@ -6428,7 +6428,7 @@
 
   "access-control-access-conditions": "Access conditions",
 
-  "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning Woreda.",
+  "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning Case Types.",
 
   "access-control-replace-all": "Replace access conditions",
 

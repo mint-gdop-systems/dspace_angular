@@ -1444,11 +1444,11 @@
 
   "collection.source.update.notifications.error.title": "Server Error",
 
-  "communityList.breadcrumbs": "Community List",
+  "communityList.breadcrumbs": "Court List",
 
-  "communityList.tabTitle": "Community List",
+  "communityList.tabTitle": "Court List",
 
-  "communityList.title": "List of Communities",
+  "communityList.title": "List of Courts",
 
   "communityList.showMore": "Show More",
 
@@ -1986,7 +1986,7 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
-  "footer.copyright": "Civil Registration and Residency Service Agency © 2002-{{ year }}",
+  "footer.copyright": "Federal Supreme Court of Ethiopia Agency © 2002-{{ year }}",
 
   "footer.link.accessibility": "Accessibility settings",
 
@@ -4466,9 +4466,9 @@
 
   "repository.image.logo": "Repository logo",
 
-  "repository.title": "DSpace Repository",
+  "repository.title": "Federal Supreme Court of Ethiopia",
 
-  "repository.title.prefix": "DSpace Repository :: ",
+  "repository.title.prefix": "Federal Supreme Court of Ethiopia :: ",
 
   "resource-policies.add.button": "Add",
 

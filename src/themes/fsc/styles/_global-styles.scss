@@ -1,0 +1,26 @@
+// Add any global css for the theme here
+
+// imports the base global style
+@import '../../../styles/_global-styles.scss';
+
+// Theme-specific global styles
+body {
+    background-color: #ffffff;
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    li,
+    span,
+    div {
+        font-family: 'Inter', sans-serif !important;
+    }
+}
+
+.navbar-brand img {
+    max-height: 50px;
+}
